@@ -1,0 +1,14 @@
+.shiny-title-navbar{
+    font-size: 60px; /* Adjust the size as needed */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase; /* Optional, for uppercase letters */
+    text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.466),
+        0 0 5px rgba(255, 247, 247, 0.397);
+    text-align: center;
+    margin: auto;
+}
+@media (min-width: 768px){
+    
+}
