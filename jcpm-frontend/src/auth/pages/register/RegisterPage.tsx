@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import "./resgister.css"
+import { AppDispatch } from "../../../store/store";
+import { startAcountResgister } from "../../../store/slices/auth/thunk";
 
 interface IRegisterForm{
   username:string
@@ -15,10 +18,13 @@ const intialFormValue:IRegisterForm={
 }
 
 export const RegisterPage = () => {
-  const {email,password,username,password2,onInputChange}=useForm<IRegisterForm>(intialFormValue)
-  
+    const {email,password,username,password2,onInputChange}=useForm<IRegisterForm>(intialFormValue)
+
+    const dispath=useDispatch<AppDispatch>();
+
     const onSubmitLogin=(event:React.FormEvent)=>{
       event.preventDefault();
+      dispath(startAcountResgister({username,email,password}))
       console.log(username,email,password,password2)
     }
   
@@ -29,10 +35,9 @@ export const RegisterPage = () => {
         <input name="username" value={username} onChange={onInputChange} type="text" className="register-input" aria-describedby="emailHelp" placeholder="Enter your username"/>
             <input name="email" value={email} onChange={onInputChange} type="email" className="register-input" aria-describedby="emailHelp" placeholder="Enter your email"/>
             <input name="password" value={password} onChange={onInputChange} type="password" className="register-input"  placeholder="Password"/>
-            <input name="password2" value={password2} onChange={onInputChange} type="password" className="register-input"  placeholder="Enter your Password again pls"/>
+            <input name="password2" value={password2} onChange={onInputChange} type="password" className="register-input"  placeholder="Enter your Password again"/>
           <div className="buttons-register-container">
             <button type="submit" className="register-button">Submit</button>
-            <button type="submit" className="register-button">Register</button>
           </div>
         </form>
       </div>
