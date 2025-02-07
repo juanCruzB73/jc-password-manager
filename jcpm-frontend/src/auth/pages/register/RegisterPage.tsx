@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
-import "./resgister.css"
 import { AppDispatch } from "../../../store/store";
-import { startAcountResgister } from "../../../store/slices/auth/thunk";
+import { startAcountResgister } from "../../../store/slices";
+import "./resgister.css"
 
 interface IRegisterForm{
   username:string

@@ -1,5 +1,65 @@
 .content-container{
-    border: 1px solid white;
+    border: 1px solid #6e6e75;
     width: 55%;
     height: 100%;
+}
+.top-options{
+    display: flex;
+    width: 90%;
+    height: 10%;
+    align-items: center;
+    justify-content: space-around;
+}
+.top-options button{
+    background-color: transparent;
+    border: none;
+}
+.data-slots{
+    display: flex;
+    height: 45%;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.email-content-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #6e6e75;
+    border-radius: 1rem;
+    width: 90%;
+    padding: .5rem;
+}
+.password-content-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #6e6e75;
+    border-radius: 1rem;
+    width: 90%;
+    padding: .5rem;
+}
+.password-content-container span{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.password-content-container span button{
+    background-color: transparent;
+    border: none;
+}
+.website-content-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #6e6e75;
+    border-radius: 1rem;
+    width: 90%;
+    padding: .5rem;
+}
+.icons-top{
+    color: white;
+    font-size: 1.2rem;
+
+}
+.icons{
+    color: white;
+    font-size: 2rem;
 }

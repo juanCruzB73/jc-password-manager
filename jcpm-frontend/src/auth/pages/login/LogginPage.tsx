@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../hooks/useForm"
 import { AppDispatch } from "../../../store/store";
-import { startAcountSignIn } from "../../../store/slices/auth/thunk";
+import { startAcountSignIn } from "../../../store/slices";
 import { useNavigate } from "react-router";
 
 import "./login.css"

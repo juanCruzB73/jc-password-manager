@@ -4,10 +4,10 @@ import "./PasswordCard.css"
 
 export const PasswordCard = () => {
 
-    const {user} = useSelector((state:RootState)=>state.auth)
+  const {user} = useSelector((state:RootState)=>state.auth)
 
-    const newTitle=()=>{
-      return user.email.length>10 ? user.email.substring(0,10)+"...":user.email
+  const newTitle=()=>{
+    return user.email.length>10 ? user.email.substring(0,10)+"...":user.email
   }
 
     return (

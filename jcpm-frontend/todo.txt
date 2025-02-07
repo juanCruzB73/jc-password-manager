@@ -1,0 +1,15 @@
+//content
+hambuerger menu
+    ->login options
+    ->all options
+    ->sort by groups
+//functionalities
+create groups
+
+//create menu
+loggin
+note
+create a password
+    ->memorable(number words)
+    ->random(number characters)
+create groups
