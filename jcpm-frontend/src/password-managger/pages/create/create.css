@@ -1,0 +1,77 @@
+.create-container{
+    width: 100%;
+    height: 90%;
+}
+.create-acount-container{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.create-top-buttons{
+    display: flex;
+    align-self: baseline;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 20%;
+}
+.create-top-buttons button{
+    background-color: transparent;
+    border: 1px solid #6e6e75;
+    border-radius: 2rem;
+    width: 15%;
+    margin: .4rem;
+    padding: .5rem;
+    color: white;
+    font-size: 1.2rem;
+}
+.create-icon{
+    font-size: 1.5rem;
+    border: none;
+}
+.input-container-create{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.input-field-create{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 30%;
+    border: 1px solid #6e6e75;
+    background-color: transparent;
+    border-radius: 1.5rem;
+    color: white;
+    font-size: 2rem;
+    padding: 2rem;
+    
+}
+
+.input-credentials-create{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border: none;
+    justify-content: space-between;
+}
+.input-credentials-create input{
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6e6e75;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 2rem;
+    color: white;
+    
+}
+.credential-form-create{    
+    width: 100%;
+    
+}
