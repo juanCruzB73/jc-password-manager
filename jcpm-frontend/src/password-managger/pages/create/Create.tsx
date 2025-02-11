@@ -3,13 +3,46 @@ import { useDispatch, useSelector } from "react-redux"
 import { RxCrossCircled } from "react-icons/rx"
 import "./create.css"
 import { AppDispatch } from "../../../store/store"
-import { onClosePopUp } from "../../../store/slices"
+import { onClosePopUp, startCreateCredential } from "../../../store/slices"
+import { useForm } from "../../../hooks/useForm"
+import React from "react"
+import { ICreateCredential, ICredential } from "../../../types"
 
+
+interface IFormCredential{
+  title:string;
+  email:string;
+  password:string;
+  webLink:string;
+  note:string;
+}
+const formInitialState={
+  title:"",
+  email:"",
+  password:"",
+  webLink:"",
+  note:"",
+}
 export const Create = () => {
     
     const {popUpType} = useSelector((state:RootState)=>state.popUp)
     const dispatch=useDispatch<AppDispatch>()
+    const {title,email,password,webLink,note,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
 
+    const onSubmitForm=(e:React.FormEvent)=>{
+      e.preventDefault();
+      const data:ICreateCredential|ICredential={
+        credentialId: Math.random(), 
+        title:title,
+        email:email,
+        password:password,
+        webSite:webLink,
+        noteId:[],
+        groupId:[],
+      }
+      dispatch(startCreateCredential(data));
+    }
+    
     return (
     <div className="create-container">
 
@@ -18,25 +51,39 @@ export const Create = () => {
           (
             <div className="create-acount-container">
 
-                <div className="create-top-buttons">
-                  <button type="button" onClick={()=>dispatch(onClosePopUp())}><RxCrossCircled className="create-icon" /></button>
-                  <button type="button">Save</button>
-                </div>
+                <form onSubmit={onSubmitForm}>
+                    <div className="create-top-buttons">
+                      <button type="button" onClick={()=>dispatch(onClosePopUp())}><RxCrossCircled className="create-icon" /></button>
+                      <button type="submit">Save</button>
+                    </div>
 
-                <div className="input-container-create">
-                    
-                  <input type="text" placeholder="Enter the name of the site" className="input-field-create"/>
+                    <div className="input-container-create">
 
-                  <div className="input-credentials-create">                    
-                      <input type="email"  placeholder="Email"/>
-                      <input type="password"  placeholder="Password"/>
+                      <input type="text" name="title" value={title} onChange={onInputChange}  placeholder="Enter the name of the site" className="input-field-create"/>
+
+                      <div className="input-credentials-create">                    
+                          <input type="email" name="email" value={email} onChange={onInputChange} placeholder="Email"/>
+                          <input type="password" name="password" value={password} onChange={onInputChange}  placeholder="Password"/>
+                      </div>
+
+                      <div className="input-credentials-create">                    
+                          <input type="text" name="webLink" value={webLink} onChange={onInputChange}  placeholder="Website link"/>
+                      </div>
+
+                      <select name="groups" id="groups">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+
+                      <div className="input-credentials-create">                    
+                          <input type="text" name="note" value={note} onChange={onInputChange}  placeholder="Add note"/>
+                      </div>
+
                   </div>
+                </form>
 
-                  <div className="input-credentials-create">                    
-                      <input type="text"  placeholder="Website link"/>
-                  </div>
-
-                </div>
             </div>
           )
         }

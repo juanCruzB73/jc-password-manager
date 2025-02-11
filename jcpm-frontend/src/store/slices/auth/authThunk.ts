@@ -1,5 +1,6 @@
+import { IUser } from "../../../types";
 import { AppDispatch } from "../../store";
-import { IPayloadResgister, IUser, onChecking, onLogin } from "./authSlice";
+import { IPayloadResgister, onChecking, onLogin } from "./authSlice";
 
 export const startCheckingAuth=()=>{
     return async(dispatch:AppDispatch)=>{
@@ -22,7 +23,7 @@ export const startAcountResgister=(payload:IPayloadResgister)=>{
         
         dispatch(onChecking());
         //const result=await loginWithEmailAndPassword({email,password});
-        const data={email:payload.email,password:payload.password}
+        const data={email:payload.email,userId:Math.random(),username:payload.username}
         dispatch(onLogin(data))
     }
 }

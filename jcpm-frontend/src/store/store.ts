@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authSlice, PopUpSlice } from './slices'
+import { authSlice, credentialsSlice, popUpSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
     auth:authSlice.reducer,
-    popUp:PopUpSlice.reducer
+    popUp:popUpSlice.reducer,
+    credential:credentialsSlice.reducer
   },
 })
 

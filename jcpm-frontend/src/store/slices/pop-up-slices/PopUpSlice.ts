@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { IPopUp } from '../../../types';
 
-
-export interface IPopUp {
-    statusPopUp:boolean;
-    popUpType:string;
-}
 
 
 const initialState: IPopUp = {
@@ -13,7 +9,7 @@ const initialState: IPopUp = {
     popUpType:"",
 }
 
-export const PopUpSlice = createSlice({
+export const popUpSlice = createSlice({
     name: 'popUp',
     initialState,
     reducers: {
@@ -30,6 +26,6 @@ export const PopUpSlice = createSlice({
   })
   
   // Action creators are generated for each case reducer function
-  export const { onTogglePopUp,onClosePopUp } = PopUpSlice.actions
+  export const { onTogglePopUp,onClosePopUp } = popUpSlice.actions
   
-  export default PopUpSlice.reducer
+  export default popUpSlice.reducer

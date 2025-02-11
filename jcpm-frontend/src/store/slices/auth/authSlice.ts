@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { IUser } from '../../../types';
 
-export interface IUser{
-    email: string,
-    password: string,
-}
 
 export interface IAuthState {
     status:string;
@@ -20,8 +17,9 @@ export interface IPayloadResgister {
 const initialState: IAuthState = {
     status:"non-authenticated",
     user:{
+        username:"",
         email: "",
-        password:"",
+        userId:null,
     },
     errorMessage:null,
 }
@@ -35,8 +33,9 @@ export const authSlice = createSlice({
     onChecking:(state)=>{
         state.status="checking",
         state.user={
+            username:"",
             email: "",
-            password:"",
+            userId:null,
         },
         state.errorMessage=null
     },

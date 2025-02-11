@@ -25,8 +25,6 @@ export const LogginPage = () => {
   const onSubmitLogin=(event:React.FormEvent)=>{
     event.preventDefault();
     dispath(startAcountSignIn({email,password}));
-    console.log(email,password)
-
   }
 
   return (
