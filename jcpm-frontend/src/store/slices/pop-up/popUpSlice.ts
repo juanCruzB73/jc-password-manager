@@ -14,7 +14,7 @@ export const popUpSlice = createSlice({
     initialState,
     reducers: {
       onTogglePopUp:(state,action:PayloadAction<string>)=>{
-        state.statusPopUp = !state.statusPopUp;
+        state.statusPopUp = true;
         state.popUpType = action.payload;
       },
       onClosePopUp:(state)=>{

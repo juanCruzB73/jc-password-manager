@@ -4,7 +4,6 @@ import { onSaveCredential } from "./credentialsSlice";
 
 export const startCreateCredential=(payload:ICredential)=>{//ICreateCredential|
     return async(dispatch:AppDispatch)=>{
-        console.log("starting");
         
         //post to create credential
         //data=await(post...)
