@@ -1,11 +1,12 @@
 import React from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RxCrossCircled } from "react-icons/rx"
 import { AppDispatch } from "../../../../store/store"
 import { onClosePopUp, startCreateCredential } from "../../../../store/slices"
 import { useForm } from "../../../../hooks/useForm"
 import { ICreateCredential, ICredential } from "../../../../types"
 import "./createCredential.css"
+import { RootState } from "@reduxjs/toolkit/query"
 
 interface IFormCredential{
   title:string;
@@ -24,6 +25,7 @@ const formInitialState={
 export const CreateCredential = () => {
     const dispatch=useDispatch<AppDispatch>()
     const {title,email,password,webLink,note,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
+    const {isSavinCredential} = useSelector((state:RootState)=>state.credential)
 
     const onSubmitForm=(e:React.FormEvent)=>{
       e.preventDefault();
@@ -45,7 +47,7 @@ export const CreateCredential = () => {
                 <form onSubmit={onSubmitForm}>
                     <div className="create-top-buttons">
                       <button type="button" onClick={()=>dispatch(onClosePopUp())}><RxCrossCircled className="create-icon" /></button>
-                      <button type="submit">Save</button>
+                      <button type="submit" disabled={isSavinCredential}>Save</button>
                     </div>
 
                     <div className="input-container-create">

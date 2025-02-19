@@ -6,14 +6,14 @@ interface ICredentialsSlice{
   credentials:ICredential[];
   selectedCredential:ICredential | null;
   isSavinCredential:boolean;
-  credentialMessage:string;
+  credentialMessage:string|null;
 }
 
 const initialState:ICredentialsSlice={
   credentials:[],
   selectedCredential:null,
   isSavinCredential:false,
-  credentialMessage:"",
+  credentialMessage:null,
 }
 
 export const credentialsSlice = createSlice({
@@ -25,17 +25,20 @@ export const credentialsSlice = createSlice({
       },
       onSelectCredential:(state,action:PayloadAction<ICredential>)=>{
         state.selectedCredential=action.payload;
-        state.credentialMessage="";
+        state.credentialMessage=null;
       },
       onSaveCredential:(state,action:PayloadAction<ICredential>)=>{
         state.credentials.push(action.payload)
         state.isSavinCredential=false
         state.credentialMessage="Credential saved!"
       },
+      onClearCredentialMessage:(state)=>{
+        state.credentialMessage=null;
+      }
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const {onSaveCredential,onSelectCredential,isSavingCredential} = credentialsSlice.actions
+  export const {onSaveCredential,onSelectCredential,isSavingCredential,onClearCredentialMessage} = credentialsSlice.actions
   
   export default credentialsSlice.reducer

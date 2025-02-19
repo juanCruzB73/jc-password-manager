@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authSlice, credentialsSlice, popUpSlice } from './slices'
+import { authSlice, credentialsSlice, groupSlice, popUpSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
     auth:authSlice.reducer,
     popUp:popUpSlice.reducer,
-    credential:credentialsSlice.reducer
+    credential:credentialsSlice.reducer,
+    group:groupSlice.reducer,
   },
 })
 

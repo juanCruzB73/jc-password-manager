@@ -18,9 +18,6 @@ export const PasswordCard:FC<{credential:ICredential}> = ({credential}) => {
 
   const dispath=useDispatch<AppDispatch>()
 
-  const selectCredential=()=>{
-
-  }
 
     return (
       <div className="card-container" onClick={()=>dispath(onSelectCredential(credential))}>
