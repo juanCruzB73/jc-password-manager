@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import { IGroup } from '../../../types'
 
 export interface IGroupSlice{
-    groups:IGroup[] | [],
+    groups:IGroup[],
     selectedGroup:null|IGroup,
     isSavinGroup:boolean,
     groupMessage:string|null,

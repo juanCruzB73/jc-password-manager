@@ -5,3 +5,5 @@ export * from "./credentials/credentialsSlice";
 export * from "./credentials/credentialThunk";
 export * from "./group/groupSlice";
 export * from "./group/groupThunk";
+export * from "./notes/noteSlice";
+export * from "./notes/noteThunk";

@@ -1,5 +1,5 @@
 import { IGroup } from "./IGroups";
-import { Inote } from "./INotes";
+import { Inote } from "./INote";
 
 export interface ICredential {
     credentialId:number | null; 

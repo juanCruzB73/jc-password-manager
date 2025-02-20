@@ -5,7 +5,7 @@ import { AppDispatch } from "../../../../store/store"
 import { RxCrossCircled } from "react-icons/rx"
 import { IGroup } from "../../../../types"
 import { RootState } from "@reduxjs/toolkit/query"
-
+import "./CreateGroup.css"
 export const CreateGroup = () => {
 
   const {groupName,onInputChange}=useForm<{groupName:string}>({groupName:""})
@@ -25,15 +25,12 @@ export const CreateGroup = () => {
         dispatch(onClosePopUp())
       }
   return (
-    <div className="create-group">
-      <form action="" onSubmit={onSubmitForm}>
+      <form onSubmit={onSubmitForm} className="create-group">
         <div className="create-top-buttons">
           <button type="button" onClick={()=>dispatch(onClosePopUp())}><RxCrossCircled className="create-icon" /></button>
           <button type="submit" disabled={isSavinGroup}>Save</button>
         </div>
-        <div>
-          <input type="text" placeholder="Group name" name="groupName" value={groupName} onChange={onInputChange}/>
-        </div>
+          <input type="text" placeholder="Group name" name="groupName" value={groupName} onChange={onInputChange} className="input-group-name"/>
         <select name="groups" id="groups">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -41,6 +38,5 @@ export const CreateGroup = () => {
           <option value="audi">Audi</option>
         </select>
       </form> 
-    </div>
   )
 }

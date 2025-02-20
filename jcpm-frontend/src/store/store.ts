@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authSlice, credentialsSlice, groupSlice, popUpSlice } from './slices'
+import { authSlice, credentialsSlice, groupSlice, popUpSlice,noteSlice } from './slices'
 
 export const store = configureStore({
   reducer: {
@@ -7,6 +7,7 @@ export const store = configureStore({
     popUp:popUpSlice.reducer,
     credential:credentialsSlice.reducer,
     group:groupSlice.reducer,
+    note:noteSlice.reducer,
   },
 })
 
