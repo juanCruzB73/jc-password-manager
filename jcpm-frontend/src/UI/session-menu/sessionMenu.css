@@ -1,0 +1,33 @@
+.add-session-div{
+    position: absolute;
+    top:8%;
+    left: 2%;
+    background-color: #121213;
+    color: #eef4f7;
+    color: aliceblue;
+    border: 1px solid #6e6e75;
+    border-radius: 1rem;
+    width: 40%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.add-session-div span{
+    font-size: 1.4rem;
+    overflow: auto;
+    padding: 1rem;
+    margin: 10px;
+}
+.add-session-div button{
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    padding: .5rem;
+    color: white;
+}
+.add-session-icon{
+    font-size: 1.5rem;
+    margin-right: 5px;
+    align-self: flex-end;
+    color: white;
+}

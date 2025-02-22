@@ -28,6 +28,7 @@
     border-radius: 1rem;
     width: 90%;
     padding: .5rem;
+    overflow: auto;
 }
 .password-content-container{
     display: flex;
@@ -36,6 +37,7 @@
     border-radius: 1rem;
     width: 90%;
     padding: .5rem;
+    overflow: auto;
 }
 .password-content-container span{
     display: flex;
@@ -53,6 +55,7 @@
     border-radius: 1rem;
     width: 90%;
     padding: .5rem;
+    overflow: auto;
 }
 .icons-top{
     color: white;

@@ -25,7 +25,21 @@
     height: 100%;
     
 }
-
+.nav-bar-session{
+    display: none;
+}
 @media (min-width: 768px){
-    
+    .hamburger-button{
+        display: none;
+    }
+    .nav-bar-session{
+        display: flex;
+    }
+    .nav-bar-session button{
+        background-color: transparent;
+        border: none;
+        font-size: 1rem;
+        padding: .5rem;
+        color: white;
+    }
 }

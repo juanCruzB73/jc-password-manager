@@ -1,5 +1,5 @@
 *{
-    font-size: 2vh;
+    
 }
 .login-container{
     display: flex;
@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
+    font-size: 2vh;
 }
 .login-title{
     text-align: center;

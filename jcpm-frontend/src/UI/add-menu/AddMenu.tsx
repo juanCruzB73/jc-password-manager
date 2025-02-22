@@ -4,22 +4,23 @@ import { MdOutlinePassword } from "react-icons/md"
 import { FaNoteSticky } from "react-icons/fa6"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "../../store/store"
-import { onTogglePopUp } from "../../store/slices"
+import { IOntogglePopUpInterface, onTogglePopUp } from "../../store/slices"
 import "./addMenu.css"
+
 export const AddMenu = () => {
 
   const dispath=useDispatch<AppDispatch>()
 
-  const onClickOption=(popUpType:string)=>{
+  const onClickOption=(popUpType:IOntogglePopUpInterface)=>{
     dispath(onTogglePopUp(popUpType))
   }
   
   return (
     <div className="add-menu-div">
-        <div className="option-add-menu"><FaIdCard className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption("credential")} >Add acount</button> </div>
-        <div className="option-add-menu"><BsBoxes className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption("group")}>Add group</button></div>
-        <div className="option-add-menu"><MdOutlinePassword className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption("password")}>Create password</button></div>
-        <div className="option-add-menu"><FaNoteSticky className="add-menu-icon"/> <button type="button"onClick={()=>onClickOption("note")}>Create a note</button></div>
+        <div className="option-add-menu"><FaIdCard className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption({popUpType:"credential",actionPopUp:"create"})} >Add acount</button> </div>
+        <div className="option-add-menu"><BsBoxes className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption({popUpType:"group",actionPopUp:"create"})}>Add group</button></div>
+        <div className="option-add-menu"><MdOutlinePassword className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption({popUpType:"password",actionPopUp:"create"})}>Create password</button></div>
+        <div className="option-add-menu"><FaNoteSticky className="add-menu-icon"/> <button type="button"onClick={()=>onClickOption({popUpType:"note",actionPopUp:"create"})}>Create a note</button></div>
     </div>
   )
 }

@@ -1,15 +1,14 @@
-import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RxCrossCircled } from "react-icons/rx"
 import { AppDispatch } from "../../../../store/store"
 import { onClosePopUp, startCreateCredential } from "../../../../store/slices"
 import { useForm } from "../../../../hooks/useForm"
 import { ICreateCredential, ICredential } from "../../../../types"
-import "./createCredential.css"
 import { RootState } from "@reduxjs/toolkit/query"
 import { MdEmail } from "react-icons/md"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { TbWorld } from "react-icons/tb"
+import "./createCredential.css"
 
 interface IFormCredential{
   title:string;
@@ -18,7 +17,7 @@ interface IFormCredential{
   webLink:string;
   note:string;
 }
-const formInitialState={
+let formInitialState={
   title:"",
   email:"",
   password:"",
@@ -26,9 +25,22 @@ const formInitialState={
   note:"",
 }
 export const CreateCredential = () => {
+
+    const {actionPopUp} = useSelector((state:RootState)=>state.popUp)
     const dispatch=useDispatch<AppDispatch>()
     const {title,email,password,webLink,note,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
-    const {isSavinCredential} = useSelector((state:RootState)=>state.credential)
+    const {isSavinCredential,selectedCredential} = useSelector((state:RootState)=>state.credential)
+    
+    if(actionPopUp=="edit"){
+      formInitialState={
+        title:selectedCredential.title,
+        email:selectedCredential.email,
+        password:selectedCredential.password,
+        webLink:selectedCredential.webSite,
+        note:"",
+    }
+  }
+    
 
     const onSubmitForm=(e:React.FormEvent)=>{
       e.preventDefault();

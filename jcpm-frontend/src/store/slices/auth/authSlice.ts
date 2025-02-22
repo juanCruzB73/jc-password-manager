@@ -44,11 +44,20 @@ export const authSlice = createSlice({
         state.user=action.payload,
         state.errorMessage=null
     },
+    onLogOut:(state)=>{
+        state.status="non-authenticated",
+        state.user={
+            username:"",
+            email: "",
+            userId:null,
+        },
+        state.errorMessage=null
+    }
     
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { onChecking,onLogin } = authSlice.actions
+export const { onChecking,onLogin,onLogOut } = authSlice.actions
 
 export default authSlice.reducer
