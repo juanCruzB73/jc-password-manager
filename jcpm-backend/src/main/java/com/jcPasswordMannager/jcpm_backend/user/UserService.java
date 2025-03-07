@@ -24,6 +24,6 @@ public class UserService {
     }
 
     public UserModel createUser(String username, String email, String password) {
-        return userRepository.save()
+        return null;
     }
 }
