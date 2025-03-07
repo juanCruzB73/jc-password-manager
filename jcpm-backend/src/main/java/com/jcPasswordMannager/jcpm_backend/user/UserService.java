@@ -22,4 +22,8 @@ public class UserService {
                 .map(userDTOMapper)
                 .collect(Collectors.toList());
     }
+
+    public UserModel createUser(String username, String email, String password) {
+        return userRepository.save()
+    }
 }
