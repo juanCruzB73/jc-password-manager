@@ -1,6 +1,9 @@
 package com.jcPasswordMannager.jcpm_backend.user;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.jcPasswordMannager.jcpm_backend.credential.CredentialModel;
+import com.jcPasswordMannager.jcpm_backend.group.GroupModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +12,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @Data
 @Builder
@@ -21,6 +23,7 @@ import java.util.Collections;
 public class UserModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer userId;
 
     @Column(nullable = false, unique = true)
@@ -31,6 +34,14 @@ public class UserModel implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<CredentialModel> credentials=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<GroupModel>groups=new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

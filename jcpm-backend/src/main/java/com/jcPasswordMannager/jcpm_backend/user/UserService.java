@@ -26,4 +26,9 @@ public class UserService {
     public UserModel createUser(String username, String email, String password) {
         return null;
     }
+
+
+    public UserModel getUserById(Integer id) {
+        return userRepository.findById(id).orElseThrow(null);
+    }
 }
