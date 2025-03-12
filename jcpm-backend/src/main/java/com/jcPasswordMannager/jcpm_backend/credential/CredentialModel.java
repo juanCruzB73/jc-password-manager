@@ -35,7 +35,7 @@ public class CredentialModel {
     @JsonBackReference
     private UserModel user;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "credentials_groups",
             joinColumns = @JoinColumn(name = "credential_id"),

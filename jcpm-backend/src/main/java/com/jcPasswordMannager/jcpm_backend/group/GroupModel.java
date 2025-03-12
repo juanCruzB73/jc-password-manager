@@ -31,7 +31,7 @@ public class GroupModel {
     @JsonBackReference
     private UserModel user;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Set<CredentialModel>credentials= new HashSet<>();
 
 
