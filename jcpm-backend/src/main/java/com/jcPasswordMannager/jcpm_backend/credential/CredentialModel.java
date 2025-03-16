@@ -1,6 +1,7 @@
 package com.jcPasswordMannager.jcpm_backend.credential;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jcPasswordMannager.jcpm_backend.group.GroupModel;
 import com.jcPasswordMannager.jcpm_backend.user.UserModel;
 import jakarta.persistence.*;
@@ -36,11 +37,7 @@ public class CredentialModel {
     private UserModel user;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
-            name = "credentials_groups",
-            joinColumns = @JoinColumn(name = "credential_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
-    )
+    @JsonManagedReference
     private Set<GroupModel> groups=new HashSet<>();
 
 

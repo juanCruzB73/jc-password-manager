@@ -32,6 +32,11 @@ public class GroupModel {
     private UserModel user;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "groups_credentials",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "credential_id")
+    )
     private Set<CredentialModel>credentials= new HashSet<>();
 
 
