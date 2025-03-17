@@ -12,11 +12,13 @@ import java.util.NoSuchElementException;
 public class CredentialService {
 
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     CredentialRepository credentialRepository;
     @Autowired
     CredentialMapper credentialMapper;
-    @Autowired
-    UserRepository userRepository;
+
+
 
     public List<CredentialModel> getCredentials() {
         return credentialRepository.findAll();
@@ -28,7 +30,6 @@ public class CredentialService {
     }
 
     public List<CredentialModel> getCredentialsByUser(Integer userId) {
-        //credentialRepository.findByUser(userId).orElseThrow(() -> new NoSuchElementException("No credentials found for user with ID " + userId));
-        return new ArrayList<>();
+        return credentialRepository.findByUser(userRepository.findById(userId).get());
     }
 }

@@ -16,8 +16,8 @@ public class CredentialController {
     public List<CredentialModel>getCredential(){
         return credentialService.getCredentials();
     }
-    @GetMapping("/credentials/${userId}")
-    public List<CredentialModel>getCredentialsByUser(@PathVariable Integer userId){
+    @GetMapping("/credentials/{userid}")
+    public List<CredentialModel>getCredentialsByUser(@PathVariable("userid") Integer userId){
         return credentialService.getCredentialsByUser(userId);
     }
     @PostMapping("/create/credential")
