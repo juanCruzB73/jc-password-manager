@@ -34,18 +34,7 @@ public class CredentialMapper {
         credential.setPassword(createDTO.password());
         credential.setWebsite(createDTO.website());
 
-        Set<GroupModel> groups = new HashSet<>();
-        if((createDTO.groups().size()>0) && createDTO.groups()!=null){
 
-            for (Integer groupId: createDTO.groups()) {
-                GroupModel group = groupRepository.findById(groupId).orElseThrow(null);
-                if (groups != null) {
-                    groups.add(group);
-                }
-            }
-
-        }
-        credential.setGroups(groups);
         return credential;
     }
 

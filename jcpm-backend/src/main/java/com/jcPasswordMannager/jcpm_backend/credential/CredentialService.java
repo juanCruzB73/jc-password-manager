@@ -1,5 +1,7 @@
 package com.jcPasswordMannager.jcpm_backend.credential;
 
+import com.jcPasswordMannager.jcpm_backend.group.GroupCreateDTO;
+import com.jcPasswordMannager.jcpm_backend.group.GroupModel;
 import com.jcPasswordMannager.jcpm_backend.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,20 @@ public class CredentialService {
 
     public List<CredentialModel> getCredentialsByUser(Integer userId) {
         return credentialRepository.findByUser(userRepository.findById(userId).get());
+    }
+
+
+    public CredentialModel updateCredential(Integer credentialId, CredentialCreateDTO createDTO) {
+        if(credentialId==createDTO.credentialId().get()){
+            var credential=credentialMapper.fromCreateToCredential(createDTO);
+            return credentialRepository.save(credential);
+        }else {
+            throw new RuntimeException("the id are not valid");
+        }
+    }
+
+    public String deleteCredential(Integer credentialId) {
+        credentialRepository.deleteById(credentialId);
+        return "deleted succesfully";
     }
 }

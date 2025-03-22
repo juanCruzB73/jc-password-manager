@@ -39,7 +39,4 @@ public class CredentialModel {
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonManagedReference
     private Set<GroupModel> groups=new HashSet<>();
-
-
-
 }
