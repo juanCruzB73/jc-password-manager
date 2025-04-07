@@ -15,7 +15,7 @@ public class CredentialController {
     @Autowired
     CredentialService credentialService;
 
-    @GetMapping("/credentials/{userid}")
+    @GetMapping("/credentials/filter/{userid}")
     public ResponseEntity<List<CredentialModel>> getCredentialsByUser(@PathVariable("userid") Integer userId){
         return credentialService.getCredentialsByUser(userId);
     }

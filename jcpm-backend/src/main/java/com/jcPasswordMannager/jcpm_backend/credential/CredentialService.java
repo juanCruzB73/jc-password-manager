@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -21,10 +24,14 @@ public class CredentialService {
     CredentialRepository credentialRepository;
     @Autowired
     CredentialMapper credentialMapper;
+    private static String AES_SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
+
 
     public ResponseEntity<List<CredentialModel>> getCredentialsByUser(Integer userId) {
         try{
-            return new ResponseEntity<>(credentialRepository.findByUser(userRepository.findById(userId).get()),HttpStatus.OK);
+            List<CredentialModel>encryptedCredentials=credentialRepository.findByUser(userRepository.findById(userId).get());
+            List<CredentialModel> decryptedCredentials=decryptCredentials(encryptedCredentials);
+            return new ResponseEntity<>(decryptedCredentials,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -59,5 +66,36 @@ public class CredentialService {
         } catch (Exception e) {
             return new ResponseEntity<String>("Error deleting Credential",HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    public List<CredentialModel> decryptCredentials(List<CredentialModel> credentialsEncrypted) {
+        List<CredentialModel> credentialsDecrypted = new ArrayList<>();
+        for (CredentialModel credential : credentialsEncrypted) {
+            try {
+                CredentialModel credentialAux = new CredentialModel();
+                credentialAux.setCredentialId(credential.getCredentialId());
+                credentialAux.setTitle(credential.getTitle());
+                credentialAux.setEmail(credential.getEmail());
+                credentialAux.setPassword(decrypt(credential.getPassword(), AES_SECRET_KEY));
+                credentialAux.setWebsite(credential.getWebsite());
+                credentialAux.setUser(credential.getUser());
+                credentialAux.setGroups(credential.getGroups());
+                credentialsDecrypted.add(credentialAux);
+            } catch (Exception e) {
+                System.err.println(" Failed to decrypt credential ID " + credential.getCredentialId());
+                e.printStackTrace();
+            }
+        }
+        return credentialsDecrypted;
+    }
+
+    public String decrypt(String ciphertext,String hexKey)throws Exception{
+        byte[] keyBytes=credentialMapper.hexStringToByteArray(hexKey);
+        SecretKeySpec secretkey=new SecretKeySpec(keyBytes,"AES");
+
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE,secretkey);
+
+        byte[] decreypted = cipher.doFinal(Base64.getDecoder().decode(ciphertext));
+        return new String(decreypted,"UTF-8");
     }
 }
