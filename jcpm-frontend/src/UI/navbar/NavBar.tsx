@@ -21,39 +21,6 @@ export const NavBar = () => {
     const [showSesionButton,setShowSesionButton] = useState(false);
     
     const formRef = useRef<HTMLDivElement>(null); // Reference to the form container
-    
-    // Close the pop-up when clicking outside
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (formRef.current && !formRef.current.contains(event.target as Node)) {
-          setShowAddMenu(false);
-        }
-      };
-
-      if (showAddMenu) {
-        document.addEventListener("mousedown", handleClickOutside);
-      }
-
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [showAddMenu]);
-
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (formRef.current && !formRef.current.contains(event.target as Node)) {
-          setShowSesionButton(false);
-        }
-      };
-
-      if (showSesionButton) {
-        document.addEventListener("mousedown", handleClickOutside);
-      }
-
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [showSesionButton]);
 
     //close addmenu when option clicked
     useEffect(()=>{
@@ -62,30 +29,37 @@ export const NavBar = () => {
       }
     },[statusPopUp])
 
+    const handleSessionPopUp=()=>{
+      setShowSesionButton(!showSesionButton);
+    };
+    const handleAddMenu=()=>{
+      setShowAddMenu(!showAddMenu);
+    }
+
     return (
       <Nav variant="underline" className="navbar-container">
               <Nav.Item style={{width:"10%"}}>
                 <div className='nav-bar-session'>
                   <button type="button" onClick={()=>{dispath(onLogOut())}}><CiLogout className="add-session-icon"/></button>
                 </div >
-                <Nav.Link ><RxHamburgerMenu className='hamburger-button' onClick={()=>setShowSesionButton(true)}/></Nav.Link>
+                <Nav.Link ><RxHamburgerMenu className='hamburger-button' onClick={()=>handleSessionPopUp()}/></Nav.Link>
               </Nav.Item>
               <Nav.Item style={{width:"50%"}}>
                 <input type="text" className='navbar-search-bar'/>
               </Nav.Item>
               <Nav.Item style={{width:"10%"}}>
-                <Nav.Link onClick={()=>setShowAddMenu(true)}><HiPlusCircle className='add-password'/></Nav.Link>
+                <Nav.Link onClick={()=>handleAddMenu()}><HiPlusCircle className='add-password'/></Nav.Link>
               </Nav.Item>
               {showAddMenu && (
                 <div ref={formRef} className="add-menu-container">
                     <AddMenu/>
                 </div>
               )}
-              {showSesionButton && (
+              {showSesionButton ? (
                 <div ref={formRef} className="add-menu-container">
                     <SessionMenu/>
                 </div>
-              )}
+              ):(<></>)}
       </Nav>
       );
 }

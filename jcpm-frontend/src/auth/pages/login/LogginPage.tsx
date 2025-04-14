@@ -24,14 +24,14 @@ export const LogginPage = () => {
 
   const onSubmitLogin=(event:React.FormEvent)=>{
     event.preventDefault();
-    dispath(startAcountSignIn({email,password}));
+    dispath(startAcountSignIn({username:email,password}));
   }
 
   return (
     <div className="login-container">
       <h1 className="login-title">Sing in</h1>
       <form className="login-form" onSubmit={onSubmitLogin}>
-          <input name="email" value={email} onChange={onInputChange} type="email" className="login-input" aria-describedby="emailHelp" placeholder="Enter your email"/>
+          <input  name="email" value={email} onChange={onInputChange} type="text" className="login-input" aria-describedby="emailHelp" placeholder="Enter your email"/>
           <input name="password" value={password} onChange={onInputChange} type="password" className="login-input"  placeholder="Password"/>
         <div className="buttons-login-container">
           <button type="submit" className="login-button" >Submit</button>

@@ -19,6 +19,10 @@ public class CredentialController {
     public ResponseEntity<List<CredentialModel>> getCredentialsByUser(@PathVariable("userid") Integer userId){
         return credentialService.getCredentialsByUser(userId);
     }
+    @GetMapping("/credentials/filter/group/{groupid}")
+    public ResponseEntity<List<CredentialModel>> getCredentialsByGroup(@PathVariable("groupid") Integer groupId){
+        return credentialService.getCredentialsByGroup(groupId);
+    }
     @PostMapping("/create/credential")
     public ResponseEntity<CredentialModel> createCredential(@RequestBody CredentialCreateDTO createDTO){
         return credentialService.createCredential(createDTO);

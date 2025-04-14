@@ -2,6 +2,7 @@ package com.jcPasswordMannager.jcpm_backend.credential;
 
 import com.jcPasswordMannager.jcpm_backend.group.GroupCreateDTO;
 import com.jcPasswordMannager.jcpm_backend.group.GroupModel;
+import com.jcPasswordMannager.jcpm_backend.group.GroupRepository;
 import com.jcPasswordMannager.jcpm_backend.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.NoSuchElementException;
+import javax.swing.text.html.Option;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CredentialService {
@@ -24,6 +24,9 @@ public class CredentialService {
     CredentialRepository credentialRepository;
     @Autowired
     CredentialMapper credentialMapper;
+    @Autowired
+    GroupRepository groupRepository;
+
     private static String AES_SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
 
 
@@ -36,6 +39,21 @@ public class CredentialService {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public ResponseEntity<List<CredentialModel>> getCredentialsByGroup(Integer groupId) {
+        try{
+            GroupModel groupAux=groupRepository.findAll().stream()
+                    .filter(group -> group.getGroupId() == groupId)
+                    .findFirst()
+                    .orElseThrow(()->new RuntimeException("Group not found"));
+            List <CredentialModel>groupAuxToList=new ArrayList<>(groupAux.getCredentials());
+            List<CredentialModel> decryptedCredentials=decryptCredentials(groupAuxToList);
+            return new ResponseEntity<>(decryptedCredentials,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     public ResponseEntity<CredentialModel> createCredential(CredentialCreateDTO createDTO) {
         try{
