@@ -34,11 +34,14 @@ export const credentialsSlice = createSlice({
       },
       onClearCredentialMessage:(state)=>{
         state.credentialMessage=null;
+      },
+      onLoadCredentials:(state,action:PayloadAction<ICredential[]>)=>{
+        state.credentials=action.payload;
       }
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const {onSaveCredential,onSelectCredential,isSavingCredential,onClearCredentialMessage} = credentialsSlice.actions
+  export const {onSaveCredential,onSelectCredential,isSavingCredential,onClearCredentialMessage,onLoadCredentials} = credentialsSlice.actions
   
   export default credentialsSlice.reducer

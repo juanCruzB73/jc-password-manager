@@ -1,13 +1,23 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { PasswordCard } from "../password-card/PasswordCard"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@reduxjs/toolkit/query"
 import "./SideBar.css"
 import { ICredential } from "../../../types"
+import { startGetCredentials } from "../../../store/slices"
+import { AppDispatch } from "../../../store/store"
 
 export const SideBar:FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const {credentials} = useSelector((state:RootState)=>state.credential);
+  const {user} = useSelector((state:RootState)=>state.auth);
 
-  const {credentials} = useSelector((state:RootState)=>state.credential)
+  useEffect(()=>{
+    const getCredentials=async()=>{
+      dispatch(await startGetCredentials(user.userId));
+    }
+    getCredentials();
+  },[])
 
   return (
     <div className="sidebar-container">
