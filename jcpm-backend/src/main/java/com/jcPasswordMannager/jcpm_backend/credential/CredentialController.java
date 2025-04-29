@@ -1,13 +1,12 @@
 package com.jcPasswordMannager.jcpm_backend.credential;
 
-import com.jcPasswordMannager.jcpm_backend.group.GroupCreateDTO;
-import com.jcPasswordMannager.jcpm_backend.group.GroupModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/v1")
 public class CredentialController {

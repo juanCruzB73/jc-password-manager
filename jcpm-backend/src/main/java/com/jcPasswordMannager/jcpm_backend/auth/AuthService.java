@@ -3,9 +3,15 @@ package com.jcPasswordMannager.jcpm_backend.auth;
 import com.jcPasswordMannager.jcpm_backend.jwt.JwtService;
 import com.jcPasswordMannager.jcpm_backend.user.UserModel;
 import com.jcPasswordMannager.jcpm_backend.user.UserRepository;
+import com.jcPasswordMannager.jcpm_backend.user.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.exec.ExecutionException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     private final JwtService jwtService;
 
@@ -45,4 +52,30 @@ public class AuthService {
                 .token(jwtService.getToken(user))
                 .build();
     }
+
+    public Object renewSession(String token) {
+        try {
+            // Extract user information (id, username, email) from the existing token
+            Claims claims = jwtService.getAllClaims(token);
+            Long userId = claims.get("userId", Long.class);
+            String username = claims.getSubject(); // The subject (username) in the token
+            String email = claims.get("email", String.class);
+
+            // Fetch user details from the database (if necessary)
+            UserModel user = userRepository.findByUsername(username).orElseThrow(); // Assuming you have a service for this
+
+            // Generate new token
+            String newToken = jwtService.getToken(user);
+            return  AuthResponse.builder()
+                    .userId(user.getUserId())
+                    .username(user.getUsername())
+                    .email(user.getEmail())
+                    .token(newToken)
+                    .build();
+        } catch (Exception e) {
+            return "Error renewing token: " + e.getMessage(); // Error handling (token invalid, expired, etc.)
+        }
+    }
+
+
 }

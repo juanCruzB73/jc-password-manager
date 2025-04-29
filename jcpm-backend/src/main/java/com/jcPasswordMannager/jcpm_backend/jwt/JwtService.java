@@ -45,7 +45,7 @@ public class JwtService {
         final String username=getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-    private Claims getAllClaims(String token){
+    public Claims getAllClaims(String token){
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()

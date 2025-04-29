@@ -23,4 +23,9 @@ public class authController {
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
+    @GetMapping("/renew/{token}")
+    public ResponseEntity<?> renewSession(@PathVariable String token) {
+        return ResponseEntity.ok(authService.renewSession(token));
+    }
+
 }
