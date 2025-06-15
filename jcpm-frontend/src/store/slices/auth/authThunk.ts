@@ -38,10 +38,16 @@ export const startAcountRenew=()=>{
         const token=localStorage.getItem('token');
         if(!token){
             dispatch(onLogOut());
+            return null;
         }
         const response = await fetch(`${API_URL}/auth/renew/${token}`,{headers: {'Content-Type': 'application/json'}})
+        if (!response.ok) {
+          dispatch(onLogOut());
+          return null;
+        }
         const data = await response.json();
         localStorage.setItem('token',data.token);
         dispatch(onLogin({email:data.email,username:data.username,userId:data.userId}))
+        return data.token;
     }
 }

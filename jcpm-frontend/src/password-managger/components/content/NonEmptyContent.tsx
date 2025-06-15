@@ -18,7 +18,7 @@ export const NonEmptyContent = () => {
     <>
       <div className="top-options">
         <h2>{selectedCredential.title}</h2>
-          <button type="button" onClick={()=>dispatch(onTogglePopUp({popUpType:"credential",actionPopUp:"edit"}))}><FaPencilAlt className="icons-top" /></button >
+          <button type="button" onClick={()=>{dispatch(onTogglePopUp({popUpType:"credential",actionPopUp:"edit"}))}}><FaPencilAlt className="icons-top" /></button >
           <button type="button"><FaTrash className="icons-top"/></button >
       </div>
       <div className="data-slots">
@@ -32,7 +32,7 @@ export const NonEmptyContent = () => {
         </div>
         <div className="website-content-container">
           <h3><TbWorld className="icons"/> site</h3>
-          <span>{selectedCredential.webSite}</span>
+          <span>{selectedCredential.website}</span>
         </div>
       </div>
     </>

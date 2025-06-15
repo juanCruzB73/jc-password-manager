@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RxCrossCircled } from "react-icons/rx"
 import { AppDispatch } from "../../../../store/store"
-import { onClosePopUp, startCreateCredential } from "../../../../store/slices"
+import { onClosePopUp, startCreateCredential, startUpdateCredential } from "../../../../store/slices"
 import { useForm } from "../../../../hooks/useForm"
 import { ICreateCredential, ICredential } from "../../../../types"
 import { RootState } from "@reduxjs/toolkit/query"
@@ -15,46 +15,65 @@ interface IFormCredential{
   email:string;
   password:string;
   webLink:string;
-  note:string;
+  //note:string;
 }
 let formInitialState={
   title:"",
   email:"",
   password:"",
   webLink:"",
-  note:"",
+  //note:"",
 }
 export const CreateCredential = () => {
 
-    const {actionPopUp} = useSelector((state:RootState)=>state.popUp)
+    const {actionPopUp} = useSelector((state:RootState)=>state.popUp);
+    const {user} = useSelector((state:RootState)=>state.auth);
+    const {isSavinCredential,selectedCredential} = useSelector((state:RootState)=>state.credential);
+
     const dispatch=useDispatch<AppDispatch>()
-    const {title,email,password,webLink,note,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
-    const {isSavinCredential,selectedCredential} = useSelector((state:RootState)=>state.credential)
+    const {title,email,password,webLink,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
     
     if(actionPopUp=="edit"){
       formInitialState={
         title:selectedCredential.title,
         email:selectedCredential.email,
         password:selectedCredential.password,
-        webLink:selectedCredential.webSite,
-        note:"",
+        webLink:selectedCredential.website,
+        //note:"",
     }
   }
     
 
     const onSubmitForm=(e:React.FormEvent)=>{
       e.preventDefault();
-      const data:ICredential={//ICreateCredential|
-        credentialId: Math.random(), 
-        title:title,
-        email:email,
-        password:password,
-        webSite:webLink,
-        noteId:[],
-        groupId:[],
+      if(actionPopUp=="edit"){
+        const data:ICreateCredential={ 
+          title:title,
+          email:email,
+          password:password,
+          website:webLink,
+          user:user.userId,
+          groupId:[],
+          //noteId:[],
+        }
+        dispatch(startCreateCredential(data));
+        dispatch(onClosePopUp())
+      }else{
+        const data:ICredential={ 
+          credentialId:selectedCredential.credentialId,
+          title:title,
+          email:email,
+          password:password,
+          website:webLink,
+          user:user.userId,
+          groupId:selectedCredential.groupId,
+          //noteId:[],
+        }
+        console.log(data)
+        dispatch(startUpdateCredential(data));
+        dispatch(onClosePopUp())
       }
-      dispatch(startCreateCredential(data));
-      dispatch(onClosePopUp())
+      
     }
     return (
 

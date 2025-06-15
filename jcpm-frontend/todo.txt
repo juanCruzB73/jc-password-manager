@@ -1,8 +1,2 @@
-//content
-hambuerger menu
-    ->all options
-    ->sort by groups
-//functionalities
-
-//create menu
-
+improve persistant login
+create and update credentials
