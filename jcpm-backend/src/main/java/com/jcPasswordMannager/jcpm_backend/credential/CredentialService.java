@@ -58,7 +58,9 @@ public class CredentialService {
     public ResponseEntity<CredentialModel> createCredential(CredentialCreateDTO createDTO) {
         try{
             var credential = credentialMapper.fromCreateToCredential(createDTO);
-            return new ResponseEntity<>(credentialRepository.save(credential), HttpStatus.OK);
+            var credentialToSave=credentialRepository.save(credential);
+            var decryptCredential=decryptCredential(credentialToSave);
+            return new ResponseEntity<>(decryptCredential, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new CredentialModel(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -68,7 +70,9 @@ public class CredentialService {
         try{
             if(credentialId==createDTO.credentialId().get()){
                 var credential=credentialMapper.fromCreateToCredential(createDTO);
-                return new ResponseEntity<>( credentialRepository.save(credential),HttpStatus.OK);
+                var credentialToSave=credentialRepository.save(credential);
+                var decryptCredential=decryptCredential(credentialToSave);
+                return new ResponseEntity<>(decryptCredential,HttpStatus.OK);
             }else {
                 return new ResponseEntity<>(new CredentialModel(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -104,6 +108,23 @@ public class CredentialService {
             }
         }
         return credentialsDecrypted;
+    }
+    public CredentialModel decryptCredential(CredentialModel credentialEncrypted) {
+            try {
+                CredentialModel credentialDecrypted = new CredentialModel();
+                credentialDecrypted.setCredentialId(credentialEncrypted.getCredentialId());
+                credentialDecrypted.setTitle(credentialEncrypted.getTitle());
+                credentialDecrypted.setEmail(credentialEncrypted.getEmail());
+                credentialDecrypted.setPassword(decrypt(credentialEncrypted.getPassword(), AES_SECRET_KEY));
+                credentialDecrypted.setWebsite(credentialEncrypted.getWebsite());
+                credentialDecrypted.setUser(credentialEncrypted.getUser());
+                credentialDecrypted.setGroups(credentialEncrypted.getGroups());
+                return credentialDecrypted;
+            } catch (Exception e) {
+                System.err.println(" Failed to decrypt credential ID " + credentialEncrypted.getCredentialId());
+                e.printStackTrace();
+            }
+        return new CredentialModel();
     }
 
     public String decrypt(String ciphertext,String hexKey)throws Exception{
