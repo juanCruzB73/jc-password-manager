@@ -1,6 +1,6 @@
 import { ICreateCredential, ICredential } from "../../../types";
 import { AppDispatch } from "../../store";
-import { isSavingCredential, onClearCredentialMessage, onLoadCredentials, onSaveCredential, onSetCredentialMessage, onUpdateCredential } from "./credentialsSlice";
+import { isSavingCredential, onClearCredentialMessage, onDeleteCredential, onLoadCredentials, onSaveCredential, onSelectCredential, onSetCredentialMessage, onUpdateCredential } from "./credentialsSlice";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -49,7 +49,6 @@ export const startCreateCredential=(payload:ICreateCredential)=>{
 
 export const startUpdateCredential=(payload:ICredential)=>{
     return async(dispatch:AppDispatch)=>{
-        
         try{
             dispatch(isSavingCredential());
             const response = await fetch(`${API_URL}/api/v1/edit/credential/${payload.credentialId}`, {
@@ -64,6 +63,26 @@ export const startUpdateCredential=(payload:ICredential)=>{
         }catch(error){
             console.log(error);
             dispatch(onSetCredentialMessage("Error updating credential"));
+            return
+        }
+    }
+}
+
+export const startDeleteCredential=(credentialId:number)=>{
+    return async(dispatch:AppDispatch)=>{
+        try{
+            dispatch(isSavingCredential());
+            const response = await fetch(`${API_URL}/api/v1/delete/credential/${credentialId}`, {
+                method: 'DELETE',
+                headers: headers,
+            });
+            dispatch(onDeleteCredential(credentialId));
+            dispatch(onClearCredentialMessage());
+            dispatch(onSelectCredential(null));
+            return
+        }catch(error){
+            console.log(error);
+            dispatch(onSetCredentialMessage("Error deleteing credential"));
             return
         }
     }

@@ -23,7 +23,7 @@ export const credentialsSlice = createSlice({
       isSavingCredential:(state)=>{
         state.isSavinCredential=true;
       },
-      onSelectCredential:(state,action:PayloadAction<ICredential>)=>{
+      onSelectCredential:(state,action:PayloadAction<ICredential|null>)=>{
         state.selectedCredential=action.payload;
         state.credentialMessage=null;
       },
@@ -50,11 +50,15 @@ export const credentialsSlice = createSlice({
       },
       onLoadCredentials:(state,action:PayloadAction<ICredential[]>)=>{
         state.credentials=action.payload;
+      },
+      onDeleteCredential:(state,action:PayloadAction<number>)=>{
+        state.credentials=state.credentials.filter(credential=>action.payload !== credential.credentialId);
+        state.isSavinCredential=false;
       }
     },
   })
   
   // Action creators are generated for each case reducer function
-  export const {onSaveCredential,onSelectCredential,isSavingCredential,onClearCredentialMessage,onLoadCredentials,onSetCredentialMessage,onUpdateCredential} = credentialsSlice.actions
+  export const {onSaveCredential,onSelectCredential,isSavingCredential,onClearCredentialMessage,onLoadCredentials,onSetCredentialMessage,onUpdateCredential,onDeleteCredential} = credentialsSlice.actions
   
   export default credentialsSlice.reducer

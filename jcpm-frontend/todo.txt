@@ -1,2 +1,2 @@
-improve persistant login
-create and update credentials
+improve persistant login(BUT HOW)
+del credential

@@ -32,6 +32,9 @@ export const groupSlice = createSlice({
           state.isSavinGroup=false;
           state.groupMessage="Group saved!"
         },
+        onSetGroupMessage:(state,action:PayloadAction<string>)=>{
+          state.groupMessage=action.payload;
+        },
         onClearGroupMessage:(state)=>{
           state.groupMessage=null;
         }
