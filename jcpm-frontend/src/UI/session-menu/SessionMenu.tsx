@@ -12,8 +12,8 @@ export const SessionMenu = () => {
   
   return (
     <div className="add-session-div">
-      <span>{user.username}</span>
-      <span>{user.email}</span>
+      <span>User: {user.username}</span>
+      <span>Email: {user.email}</span>
       <button type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout className="add-session-icon" /></button>
     </div >
   )

@@ -11,16 +11,17 @@
     height: 30%;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 .add-session-div span{
-    font-size: 1.4rem;
-    overflow: auto;
+    font-size: 1.5rem;
     padding: 1rem;
-    margin: 10px;
 }
 .add-session-div button{
     background-color: transparent;
     border: none;
+    align-self: baseline;
+    margin-left: 1.3rem;
     font-size: 1rem;
     padding: .5rem;
     color: white;

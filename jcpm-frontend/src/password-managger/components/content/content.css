@@ -9,6 +9,7 @@
     height: 10%;
     align-items: center;
     justify-content: space-around;
+    padding: 3rem;
 }
 .top-options button{
     background-color: transparent;
@@ -65,4 +66,13 @@
 .icons{
     color: white;
     font-size: 2rem;
+}
+@media (min-width: 768px){
+    .top-options{
+        display: flex;
+        width: 50%;
+        height: 10%;
+        align-items: center;
+        justify-content: space-around;
+    }
 }

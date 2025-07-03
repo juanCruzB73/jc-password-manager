@@ -21,16 +21,35 @@ export const groupSlice = createSlice({
     initialState,
     reducers: {
         isSavingGroup:(state)=>{
-            state.isSavinGroup=true;
+          state.isSavinGroup=true;
         },
-        onSelectGroup:(state,action:PayloadAction<IGroup>)=>{
+        onLoadGroups:(state,action:PayloadAction<IGroup[]>)=>{
+          state.groups=action.payload;
+        },
+        onSelectGroup:(state,action:PayloadAction<IGroup|null>)=>{
           state.selectedGroup=action.payload;
           state.groupMessage=null;
+          state.isSavinGroup=false;
         },
         onSaveGroup:(state,action:PayloadAction<IGroup>)=>{//ICreateGroup
           state.groups.push(action.payload);
           state.isSavinGroup=false;
           state.groupMessage="Group saved!"
+        },
+        onEditGroup:(state,action:PayloadAction<IGroup>)=>{
+          state.groups=state.groups.map((group:IGroup)=>{
+          if(group.groupId === action.payload.groupId){
+            return action.payload;
+          }
+          return group;
+        })
+        state.isSavinGroup=false;
+        state.groupMessage=null;
+        },
+        onDeleteGroup:(state,action:PayloadAction<number>)=>{
+          state.groups=state.groups.filter((group:IGroup)=>action.payload!=group.groupId);
+          state.isSavinGroup=false;
+          state.groupMessage=null;
         },
         onSetGroupMessage:(state,action:PayloadAction<string>)=>{
           state.groupMessage=action.payload;
@@ -42,6 +61,6 @@ export const groupSlice = createSlice({
   })
   
   // Action creators are generated for each case reducer function
-  export const { isSavingGroup,onSelectGroup,onSaveGroup,onClearGroupMessage } = groupSlice.actions
+  export const { onSetGroupMessage,onLoadGroups,onEditGroup,onDeleteGroup,isSavingGroup,onSelectGroup,onSaveGroup,onClearGroupMessage } = groupSlice.actions
   
   export default groupSlice.reducer

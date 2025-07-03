@@ -63,7 +63,7 @@ export const CreateCredential = () => {
           groupId:selectedCredential.groupId,
           //noteId:[],
         }
-        console.log(data)
+        
         dispatch(startUpdateCredential(data));
         dispatch(onSelectCredential(data));
         dispatch(onClosePopUp())

@@ -18,11 +18,18 @@ export const useForm = <T extends FormValue>(intialState:T) => {
         })
     }
 
+    const setFieldValue = (name: string, value: any) => {
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
     const onResetForm=()=>{
         setFormState(intialState)
     }
 
     return {
-        ...formState,formState,onInputChange,onResetForm
+        ...formState,formState,onInputChange,onResetForm,setFieldValue
   }
 }

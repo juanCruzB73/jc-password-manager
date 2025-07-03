@@ -25,6 +25,21 @@ export const startGetCredentials=async(userId:number)=>{
     }
 }
 
+export const startGetCredentialsByGroup=async(groupId:number)=>{
+    return async(dispatch:AppDispatch)=>{
+        try{
+            const response=await fetch(`${API_URL}/api/v1/credentials/filter/group/${groupId}`,{headers:headers});
+            const data=await response.json();
+            dispatch(onLoadCredentials(data));
+            return
+        }catch(error){
+            console.log(error)
+            dispatch(onSetCredentialMessage("error getting credential"))
+            return []
+        }
+    }
+}
+
 export const startCreateCredential=(payload:ICreateCredential)=>{
     return async(dispatch:AppDispatch)=>{
         

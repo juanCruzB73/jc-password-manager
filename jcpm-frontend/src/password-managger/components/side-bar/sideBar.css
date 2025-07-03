@@ -2,6 +2,41 @@
     height: 100%;
     width: 40%;
     border: 1px solid #6e6e75;
+    overflow-y: auto;
+}
+.filter-buttons{
+    padding: 1rem;
+}
+.filter-buttons button{
+    padding: .6rem;
+    margin-right: .4rem;
+    font-size: 1.2rem;
+    background-color: transparent;
+    color: white;
+    border: #6e6e75 1px solid;
+    border-radius: .7rem;
+}
+.group-diplay{
+    display: flex;
+    flex-direction: column;
     
-
+}
+.group-diplay span{
+    font-size: 1.5rem;
+}
+.group-diplay span:hover{
+    cursor: pointer;
+    color: #888892 ;
+}
+.groupSelectoContainer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.groupButtons button{
+    border: none;
+}
+.groupButtons svg{
+    font-size: 1.1rem;
 }

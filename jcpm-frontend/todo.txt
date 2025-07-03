@@ -1,2 +1,3 @@
 improve persistant login(BUT HOW)
-del credential
+implements all functionalities to groups
+add security to filter by group(backend)
