@@ -16,7 +16,8 @@ const intialFormValue={
 }
 export const LogginPage = () => {
 
-  const {email,password,onInputChange}=useForm<ILoginForm>(intialFormValue)
+  const {email,password,onInputChange}=useForm<ILoginForm>(intialFormValue);
+  
 
   const navigate=useNavigate();
 

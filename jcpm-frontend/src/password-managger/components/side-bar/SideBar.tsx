@@ -7,17 +7,26 @@ import { AppDispatch } from "../../../store/store";
 import {onSelectGroup} from "../../../store/slices/group/groupSlice";
 import "./SideBar.css";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { IOntogglePopUpInterface, onTogglePopUp, startDeleteGroup, startGetCredentials } from "../../../store/slices";
 
 export const SideBar:FC = () => {
 
   const {credentials} = useSelector((state:RootState)=>state.credential);
   const {groups,selectedGroup} = useSelector((state:RootState)=>state.group);
+
   const [showGroups,setShowGroups]=useState(false);
 
-  const dispath=useDispatch<AppDispatch>()
+  const dispath=useDispatch<AppDispatch>();
+
+  const onClickOption=(popUpType:IOntogglePopUpInterface)=>{
+    dispath(onTogglePopUp(popUpType))
+  }
 
   const onHandleSelectGroup=(groupIn:IGroup|null)=>{
     dispath(onSelectGroup(groupIn));
+  }
+  const onHandleDeleteGroup=async(groupId:number)=>{
+    dispath(startDeleteGroup(groupId));
   }
 
   return (
@@ -33,8 +42,8 @@ export const SideBar:FC = () => {
                   <div className="groupSelectoContainer">
                     <span key={group.groupId} onClick={()=>onHandleSelectGroup(group)}>{group.titleGroup}</span>
                     <div className="groupButtons">
-                      <button type="button" onClick={()=>{}}><FaPencilAlt className="icons-top" /></button >
-                      <button type="button" onClick={()=>{}}><FaTrash className="icons-top"/></button >
+                      <button type="button" onClick={()=>{dispath(onSelectGroup(group));onClickOption({popUpType:"group",actionPopUp:"edit"});}}><FaPencilAlt className="icons-top" /></button >
+                      <button type="button" onClick={()=>{onHandleDeleteGroup(group.groupId)}}><FaTrash className="icons-top"/></button >
                     </div></div>
                 ))
               }

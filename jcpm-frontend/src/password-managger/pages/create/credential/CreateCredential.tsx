@@ -36,17 +36,15 @@ export const CreateCredential = () => {
         title:selectedCredential.title,
         email:selectedCredential.email,
         password:selectedCredential.password,
-        webLink:selectedCredential.website,
-        //note:"",
+        webLink:selectedCredential.website
       }
     }else{
       formInitialState={
       title:"",
       email:"",
       password:"",
-      webLink:"",
-      //note:"",
-}
+      webLink:""
+    }
     }
     const {title,email,password,webLink,onInputChange,onResetForm}=useForm<IFormCredential>(formInitialState)
 

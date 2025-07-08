@@ -29,6 +29,7 @@ export const JcPasswordMannagerApp = () => {
             email: payload.email,
             userId: Number(payload.userId),
           }));
+          dispatch(await startGetCredentials(user.userId));
         }
       };
       checkToken();
@@ -54,7 +55,6 @@ export const JcPasswordMannagerApp = () => {
   return (
     <>
         {status=="authenticated"?<NavBar/>:<Title/>}
-
         {statusPopUp===false?<AppRouter/>:<Create/>}
     </>
   )

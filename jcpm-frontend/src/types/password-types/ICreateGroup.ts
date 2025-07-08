@@ -1,5 +1,6 @@
-export interface IGroup{
-    groupId:number;
+export interface ICreateGroup{
+    groupId?:number;
+    user:number;
     titleGroup:string;
-    credentialsID:number[];
+    credentials:number[];
 }
