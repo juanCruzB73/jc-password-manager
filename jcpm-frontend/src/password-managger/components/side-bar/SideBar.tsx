@@ -7,7 +7,7 @@ import { AppDispatch } from "../../../store/store";
 import {onSelectGroup} from "../../../store/slices/group/groupSlice";
 import "./SideBar.css";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
-import { IOntogglePopUpInterface, onTogglePopUp, startDeleteGroup, startGetCredentials } from "../../../store/slices";
+import { IOntogglePopUpInterface, onTogglePopUp, startDeleteGroup } from "../../../store/slices";
 
 export const SideBar:FC = () => {
 

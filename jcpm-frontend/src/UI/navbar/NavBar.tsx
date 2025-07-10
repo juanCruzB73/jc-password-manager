@@ -22,44 +22,62 @@ export const NavBar = () => {
     
     const formRef = useRef<HTMLDivElement>(null); // Reference to the form container
 
-    //close addmenu when option clicked
-    useEffect(()=>{
-      if(statusPopUp ==  true){
-        setShowAddMenu(false);
-      }
-    },[statusPopUp])
+      //close addmenu when option clicked
+      useEffect(()=>{
+        if(statusPopUp ==  true){
+          setShowAddMenu(false);
+        }
+      },[statusPopUp])
 
-    const handleSessionPopUp=()=>{
-      setShowSesionButton(!showSesionButton);
-    };
-    const handleAddMenu=()=>{
-      setShowAddMenu(!showAddMenu);
-    }
+      const handleSessionPopUp=()=>{
+        setShowSesionButton(!showSesionButton);
+      };
+      const handleAddMenu=()=>{
+        setShowAddMenu(!showAddMenu);
+      }
+
+      const [size, setSize] = useState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+
+    useEffect(() => {
+      const handleResize = () => {
+        setSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
+      window.addEventListener('resize', handleResize);
+      // Cleanup on unmount
+      return () => window.removeEventListener('resize', handleResize);
+    },[]);
 
     return (
       <Nav variant="underline" className="navbar-container">
-              <Nav.Item style={{width:"10%"}}>
-                <div className='nav-bar-session'>
-                  <button type="button" onClick={()=>{dispath(onLogOut())}}><CiLogout className="add-session-icon"/></button>
-                </div >
-                <Nav.Link ><RxHamburgerMenu className='hamburger-button' onClick={()=>handleSessionPopUp()}/></Nav.Link>
-              </Nav.Item>
-              <Nav.Item style={{width:"50%"}}>
-                <input type="text" className='navbar-search-bar'/>
-              </Nav.Item>
-              <Nav.Item style={{width:"10%"}}>
-                <Nav.Link onClick={()=>handleAddMenu()}><HiPlusCircle className='add-password'/></Nav.Link>
-              </Nav.Item>
-              {showAddMenu && (
-                <div ref={formRef} className="add-menu-container">
-                    <AddMenu/>
-                </div>
-              )}
-              {showSesionButton ? (
-                <div ref={formRef} className="add-menu-container">
-                    <SessionMenu/>
-                </div>
-              ):(<></>)}
+        <Nav.Item style={{width:"10%"}}>
+          <div className='nav-bar-session'>
+            {size.width<762?<button type="button" onClick={()=>{dispath(onLogOut())}}><CiLogout className="add-session-icon"/></button>:<></>}
+          </div >
+          <Nav.Link > <RxHamburgerMenu className='hamburger-button' onClick={()=>handleSessionPopUp()}/> </Nav.Link>
+        </Nav.Item>
+        <Nav.Item style={{width:"50%"}}>
+          <input type="text" className='navbar-search-bar'/>
+        </Nav.Item>
+        <Nav.Item style={{width:"10%"}}>
+          <Nav.Link onClick={()=>handleAddMenu()}><HiPlusCircle className='add-password'/></Nav.Link>
+        </Nav.Item>
+        {showAddMenu && (
+          <div ref={formRef} className="add-menu-container">
+            <AddMenu/>
+          </div>
+        )}
+        {showSesionButton ? (
+          <div ref={formRef} className="add-menu-container">
+              <SessionMenu/>
+          </div>
+        ):(<></>)}
       </Nav>
       );
 }

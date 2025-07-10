@@ -40,3 +40,6 @@
 .groupButtons svg{
     font-size: 1.1rem;
 }
+@media (min-width: 768px){
+    .sidebar-container{width: 40%;}
+}
