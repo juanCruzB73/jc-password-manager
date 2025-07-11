@@ -6,10 +6,13 @@
 }
 .filter-buttons{
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 .filter-buttons button{
     padding: .6rem;
     margin-right: .4rem;
+    width: 100%;
     font-size: 1.2rem;
     background-color: transparent;
     color: white;
@@ -19,27 +22,69 @@
 .group-diplay{
     display: flex;
     flex-direction: column;
-    
 }
 .group-diplay span{
-    font-size: 1.5rem;
+    font-size: 1rem;
+    border-radius: 1rem;
 }
 .group-diplay span:hover{
     cursor: pointer;
     color: #888892 ;
 }
-.groupSelectoContainer{
+.groupSelectorContainer{
     display: flex;
     width: 100%;
-    justify-content: space-between;
     align-items: center;
+    justify-content: baseline;
+    border: 1px solid #6e6e75;
+}
+.groupButtons{
+    display: flex;
+    max-width: 20%;
 }
 .groupButtons button{
-    border: none;
+    
 }
 .groupButtons svg{
-    font-size: 1.1rem;
+    font-size: .9rem;
 }
 @media (min-width: 768px){
-    .sidebar-container{width: 40%;}
+    .sidebar-container{
+        max-width: 30%;
+    };
+    .filter-buttons{
+        padding: .1px;
+    }
+    .filter-buttons button{
+        padding: .6rem;
+        margin-right: .4rem;
+        width: 100%;
+        font-size: 1.2rem;
+        background-color: transparent;
+        color: white;
+        border: #6e6e75 1px solid;
+        border-radius: .7rem;
+    }
+    .groupSelectorContainer{
+        width: 100%;
+        border: 1px solid #6e6e75;
+    }
+    .group-diplay{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .group-diplay span{
+        padding: 1px;
+        font-size: 1rem;
+    }
+    .groupButtons{
+        width: 20%;
+    }
+    .groupButtons button{
+        border: none;
+    }
+    .groupButtons svg{
+        font-size: .9rem;
+    }
 }

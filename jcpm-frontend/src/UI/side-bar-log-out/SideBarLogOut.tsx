@@ -1,9 +1,63 @@
-import React from 'react'
-import './sideBarLogOut';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { RootState } from '@reduxjs/toolkit/query';
+import { IOntogglePopUpInterface, onLogOut, onSelectGroup, onTogglePopUp, startDeleteGroup } from '../../store/slices';
+import { CiLogout } from 'react-icons/ci';
+import { useState } from 'react';
+import { IGroup } from '../../types';
+import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import './SideBarLogOut.css';
+import { AiOutlineClear } from 'react-icons/ai';
+
 export const SideBarLogOut = () => {
+
+  const {user} = useSelector((state:RootState)=>state.auth);
+  const dispath=useDispatch<AppDispatch>();
+  const {groups,selectedGroup} = useSelector((state:RootState)=>state.group);
+  
+  const [showGroups,setShowGroups]=useState(false);
+    
+  const onClickOption=(popUpType:IOntogglePopUpInterface)=>{
+    dispath(onTogglePopUp(popUpType))
+  }
+
+  const onHandleSelectGroup=(groupIn:IGroup|null)=>{
+    dispath(onSelectGroup(groupIn));
+  }
+  const onHandleDeleteGroup=async(groupId:number)=>{
+    dispath(startDeleteGroup(groupId));
+  }
+
   return (
-    <div className='side-bar-log-out'>
-      sidebar
+    <div className="side-bar-log-out">
+      
+      <div className="filter-buttons">
+        <button style={{padding:".3rem",marginBottom:"10px",}} onClick={()=>setShowGroups(!showGroups)}>Groups</button>{selectedGroup!==null?<button>{selectedGroup.titleGroup}</button>:<></>}
+        {
+          showGroups?(
+            <div className="group-diplay">
+              <span style={{display:"flex",alignItems:"center",justifyContent:"space-between"}} onClick={()=>onHandleSelectGroup(null)}>Clear Group <AiOutlineClear/></span>
+              {
+                groups.map((group:IGroup)=>(
+                  <div className="groupSelectorContainer">
+                    <span key={group.groupId} onClick={()=>onHandleSelectGroup(group)}>{group.titleGroup}</span>
+                    <div className="groupButtons">
+                      <button type="button" onClick={()=>{dispath(onSelectGroup(group));onClickOption({popUpType:"group",actionPopUp:"edit"});}}><FaPencilAlt className="icons-top" /></button >
+                      <button type="button" onClick={()=>{onHandleDeleteGroup(group.groupId)}}><FaTrash className="icons-top"/></button >
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          ):(
+            <></>
+          )
+        }
+      </div>
+      
+      <span className="side-bar-log-out-info">User: {user.username}</span>
+      <span >Email: {user.email}</span>
+      <button style={{backgroundColor:"transparent",color:"white",padding:".4rem",border:"none"}} type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout style={{fontSize:"1.5rem"}} /></button>
     </div>
   )
 };

@@ -74,7 +74,7 @@
 @media (min-width: 768px){
     .top-options{
         display: flex;
-        width: 40%;
+        max-width: 40%;
         height: 10%;
         align-items: center;
         justify-content: center;
