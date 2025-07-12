@@ -18,8 +18,10 @@ export const NonEmptyContent = () => {
     <>
       <div className="top-options">
         <h2>{selectedCredential.title}</h2>
+        <div className="top-options-button-container">
           <button type="button" onClick={()=>{dispatch(onTogglePopUp({popUpType:"credential",actionPopUp:"edit"}))}}><FaPencilAlt className="icons-top" /></button >
           <button type="button" onClick={()=>dispatch(startDeleteCredential(selectedCredential.credentialId))}><FaTrash className="icons-top"/></button >
+        </div>
       </div>
       <div className="data-slots">
         <div className="email-content-container">

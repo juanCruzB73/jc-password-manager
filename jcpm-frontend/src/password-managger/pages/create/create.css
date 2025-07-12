@@ -1,0 +1,10 @@
+.create-container{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: brightness(90%) blur(2px);
+}

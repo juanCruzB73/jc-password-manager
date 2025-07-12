@@ -32,7 +32,9 @@ export const SideBarLogOut = () => {
     <div className="side-bar-log-out">
       
       <div className="filter-buttons">
-        <button style={{padding:".3rem",marginBottom:"10px",}} onClick={()=>setShowGroups(!showGroups)}>Groups</button>{selectedGroup!==null?<button>{selectedGroup.titleGroup}</button>:<></>}
+        <div className='side-bar-log-out-group-button'>
+            <button style={{padding:".3rem",marginBottom:"10px",}} onClick={()=>setShowGroups(!showGroups)}>Groups</button>{selectedGroup!==null?<button>{selectedGroup.titleGroup}</button>:<></>}
+        </div>
         {
           showGroups?(
             <div className="group-diplay">
@@ -54,10 +56,11 @@ export const SideBarLogOut = () => {
           )
         }
       </div>
-      
-      <span className="side-bar-log-out-info">User: {user.username}</span>
-      <span >Email: {user.email}</span>
-      <button style={{backgroundColor:"transparent",color:"white",padding:".4rem",border:"none"}} type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout style={{fontSize:"1.5rem"}} /></button>
+      <div className='side-bar-log-out-user-info'>
+        <span>User: {user.username}</span>
+        <span >Email: {user.email}</span>
+        <button style={{backgroundColor:"transparent",color:"white",padding:".4rem",border:"none"}} type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout style={{fontSize:"1.5rem"}} /></button>
+      </div>
     </div>
   )
 };

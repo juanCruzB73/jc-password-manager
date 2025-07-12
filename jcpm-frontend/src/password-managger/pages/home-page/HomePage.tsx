@@ -3,8 +3,13 @@ import { Content } from "../../components/content/Content"
 import { SideBar } from "../../components/side-bar/SideBar"
 import "./HomePage.css";
 import { SideBarLogOut } from "../../../UI/side-bar-log-out/SideBarLogOut";
+import { useSelector } from "react-redux";
+import { RootState } from "@reduxjs/toolkit/query";
+import { Create } from "../create/Create";
 
 export const HomePage = () => {
+  const {statusPopUp} = useSelector((state:RootState)=>state.popUp);
+
 
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -29,6 +34,7 @@ export const HomePage = () => {
     <>
       <div className="home-container">
         {size.width>768?<SideBarLogOut/>:<></>}
+        {statusPopUp&&<Create/>}
         <SideBar/>
         <Content/>
       </div>

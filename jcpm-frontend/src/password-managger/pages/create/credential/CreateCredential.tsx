@@ -98,12 +98,7 @@ export const CreateCredential = () => {
               <div className="input-credentials-create">                    
                 <div className="input-credential-field"><TbWorld className="create-icon"/><input type="text" name="webLink" value={webLink} onChange={onInputChange}  placeholder="Website link"/></div>
               </div>
-              <select name="groups" id="groups" className="create-select">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-              </select>
+              
             </div>
           
           </form>

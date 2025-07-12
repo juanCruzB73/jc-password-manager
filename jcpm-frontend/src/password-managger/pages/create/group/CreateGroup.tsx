@@ -73,7 +73,7 @@ export const CreateGroup = () => {
         <button type="button" onClick={() => dispatch(onClosePopUp())}>
           <RxCrossCircled className="create-icon" />
         </button>
-        <button type="submit">Save</button>
+        <button type="submit" style={{marginLeft:"1rem"}}>Save</button>
       </div>
 
       <input
@@ -84,7 +84,7 @@ export const CreateGroup = () => {
         onChange={onInputChange}
         className="input-group-name"
       />
-
+      
       <CredentialDropdown
         credentials={credentials}
         selectedCredentialIds={selectedCredentialIds}

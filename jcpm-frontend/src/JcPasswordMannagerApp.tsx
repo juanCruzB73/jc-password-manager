@@ -12,7 +12,6 @@ import { onLogin, startGetCredentials, startGetCredentialsByGroup, startGetGroup
 export const JcPasswordMannagerApp = () => {
 
   const {status,user} = useSelector((state:RootState)=>state.auth);
-  const {statusPopUp} = useSelector((state:RootState)=>state.popUp);
   const {selectedGroup} = useSelector((state:RootState)=>state.group);
 
   const [token,setToken]=useState(localStorage.getItem("token"));
@@ -59,7 +58,7 @@ export const JcPasswordMannagerApp = () => {
   return (
     <>
       {status=="authenticated"?<NavBar/>:<Title/>}
-      {statusPopUp===false?<AppRouter/>:<Create/>}
+      <AppRouter/>
     </>
   )
 }

@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
-    height: 50%;
+    height: 100%;
+    padding: 1rem;
+    background-color: #121213;
 }
 .input-group-name{
     display: flex;
@@ -35,4 +36,19 @@
   align-items: center;
   gap: 8px;
   font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .input-group-name{
+    width: 60%;
+  }
+  .create-group{
+    align-items: center;
+  }
+  .create-group{
+    align-self: center;
+    justify-self: center;
+    width: 70%;
+    height: 80%;
+}
 }

@@ -7,8 +7,9 @@ import { AppDispatch } from "../../../store/store";
 import {onSelectGroup} from "../../../store/slices/group/groupSlice";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { IOntogglePopUpInterface, onTogglePopUp, startDeleteGroup } from "../../../store/slices";
-import "./SideBar.css";
 import { AiOutlineClear } from "react-icons/ai";
+import "./SideBar.css";
+
 
 export const SideBar:FC = () => {
 
@@ -46,7 +47,9 @@ export const SideBar:FC = () => {
   return (
     <div className="sidebar-container">
       {size.width<762?(<div className="filter-buttons">
-        <button style={{padding:".3rem",marginBottom:"10px"}} onClick={()=>setShowGroups(!showGroups)}>Groups </button>{selectedGroup!==null?<button>{selectedGroup.titleGroup}</button>:<></>}
+        <div className="side-bar-log-out-group-button">
+          <button style={{padding:".3rem",marginBottom:"10px"}} onClick={()=>setShowGroups(!showGroups)}>Groups </button>{selectedGroup!==null?<button>{selectedGroup.titleGroup}</button>:<></>}
+        </div>
         {
           showGroups?(
             <div className="group-diplay">
