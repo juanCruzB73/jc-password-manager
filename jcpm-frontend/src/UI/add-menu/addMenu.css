@@ -30,3 +30,9 @@
     font-size: 1.5rem;
     margin-right: 5px;
 }
+@media (min-width: 768px){
+    .add-menu-div{
+        left: 73%;
+        width: 25%;
+    }
+}

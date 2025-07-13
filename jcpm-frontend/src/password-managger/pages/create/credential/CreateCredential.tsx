@@ -9,6 +9,8 @@ import { MdEmail } from "react-icons/md"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { TbWorld } from "react-icons/tb"
 import "./createCredential.css"
+import { useState } from "react"
+import { FaEye } from "react-icons/fa"
 
 interface IFormCredential{
   title:string;
@@ -30,6 +32,7 @@ export const CreateCredential = () => {
     const {user} = useSelector((state:RootState)=>state.auth);
     const {isSavinCredential,selectedCredential} = useSelector((state:RootState)=>state.credential);
 
+    const [showPassword,setShowPassword]=useState(false);
     const dispatch=useDispatch<AppDispatch>()
     if(actionPopUp=="edit"){
       formInitialState={
@@ -87,13 +90,12 @@ export const CreateCredential = () => {
             <button type="button" onClick={()=>dispatch(onClosePopUp())}><RxCrossCircled className="create-icon" /></button>
             <button type="submit" disabled={isSavinCredential}>Save</button>
           </div>
-          
           <div className="input-container-create">
-              <input type="text" name="title" value={title} onChange={onInputChange}  placeholder="Enter the name of the site" className="input-field-create"/>
+              <input type="text" name="title" value={title} onChange={onInputChange}  placeholder="Site's name" className="input-field-create"/>
           
               <div className="input-credentials-create">
                 <div className="input-credential-field" style={{borderBottom:"1px solid #6e6e75"}}><MdEmail className="create-icon"/><input type="email" name="email" value={email} onChange={onInputChange} placeholder="Email"/></div>            
-                <div className="input-credential-field"><RiLockPasswordFill className="create-icon"/><input type="password" name="password" value={password} onChange={onInputChange}  placeholder="Password"/></div>
+                <div className="input-credential-field"><RiLockPasswordFill className="create-icon"/><input type={showPassword?"text":"password"} name="password" value={password} onChange={onInputChange}  placeholder="Password"/><FaEye onClick={()=>setShowPassword(!showPassword)} className="create-icon" /></div>
               </div>
               <div className="input-credentials-create">                    
                 <div className="input-credential-field"><TbWorld className="create-icon"/><input type="text" name="webLink" value={webLink} onChange={onInputChange}  placeholder="Website link"/></div>

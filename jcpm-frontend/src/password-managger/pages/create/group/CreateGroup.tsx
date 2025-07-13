@@ -69,29 +69,32 @@ export const CreateGroup = () => {
 
   return (
     <form onSubmit={onSubmitForm} className="create-group">
-      <div className="create-top-buttons">
-        <button type="button" onClick={() => dispatch(onClosePopUp())}>
-          <RxCrossCircled className="create-icon" />
-        </button>
-        <button type="submit" style={{marginLeft:"1rem"}}>Save</button>
+      <div className="create-group-contanier">
+        <div className="create-top-buttons">
+          <button type="button" onClick={() => dispatch(onClosePopUp())}>
+            <RxCrossCircled className="create-icon" />
+          </button>
+          <button type="submit" style={{marginLeft:"1rem"}}>Save</button>
+        </div>
+        <div>
+          <h2>Create a group</h2>
+          <span>Store credentials making them easy to find</span>
+        </div>
+        <input
+          type="text"
+          placeholder="Group name"
+          name="groupName"
+          value={groupName}
+          onChange={onInputChange}
+          className="input-group-name"
+        />
+
+        <CredentialDropdown
+          credentials={credentials}
+          selectedCredentialIds={selectedCredentialIds}
+          setFieldValue={setFieldValue}
+        />
       </div>
-
-      <input
-        type="text"
-        placeholder="Group name"
-        name="groupName"
-        value={groupName}
-        onChange={onInputChange}
-        className="input-group-name"
-      />
-      
-      <CredentialDropdown
-        credentials={credentials}
-        selectedCredentialIds={selectedCredentialIds}
-        setFieldValue={setFieldValue}
-      />
-
-
     </form>
   );
 };

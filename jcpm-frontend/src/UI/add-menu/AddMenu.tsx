@@ -20,7 +20,7 @@ export const AddMenu = () => {
         <div className="option-add-menu"><FaIdCard className="add-menu-icon"/> <button type="button" onClick={()=>{onClickOption({popUpType:"credential",actionPopUp:"create"});dispath(onSelectCredential(null))}} >Add acount</button> </div>
         <div className="option-add-menu"><BsBoxes className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption({popUpType:"group",actionPopUp:"create"})}>Add group</button></div>
         <div className="option-add-menu"><MdOutlinePassword className="add-menu-icon"/> <button type="button" onClick={()=>onClickOption({popUpType:"password",actionPopUp:"create"})}>Create password</button></div>
-        <div className="option-add-menu"><FaNoteSticky className="add-menu-icon"/> <button type="button"onClick={()=>onClickOption({popUpType:"note",actionPopUp:"create"})}>Create a note</button></div>
+        {/*<div className="option-add-menu"><FaNoteSticky className="add-menu-icon"/> <button type="button"onClick={()=>onClickOption({popUpType:"note",actionPopUp:"create"})}>Create a note</button></div>*/}
     </div>
   )
 }

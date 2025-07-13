@@ -91,7 +91,8 @@
         padding: 0px;
     }
     .side-bar-log-out-user-info{
-       
+       display: flex;
+        flex-direction: column;
         padding: 2rem;
     }
     .group-diplay span{

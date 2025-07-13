@@ -38,7 +38,7 @@ export const SideBarLogOut = () => {
         {
           showGroups?(
             <div className="group-diplay">
-              <span style={{display:"flex",alignItems:"center",justifyContent:"space-between"}} onClick={()=>onHandleSelectGroup(null)}>Clear Group <AiOutlineClear/></span>
+              <span style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"90%",marginLeft:"10px"}} onClick={()=>onHandleSelectGroup(null)}>Clear Group <AiOutlineClear/></span>
               {
                 groups.map((group:IGroup)=>(
                   <div className="groupSelectorContainer">
@@ -58,8 +58,8 @@ export const SideBarLogOut = () => {
       </div>
       <div className='side-bar-log-out-user-info'>
         <span>User: {user.username}</span>
-        <span >Email: {user.email}</span>
-        <button style={{backgroundColor:"transparent",color:"white",padding:".4rem",border:"none"}} type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout style={{fontSize:"1.5rem"}} /></button>
+        <span>{user.email}</span>
+        <button style={{backgroundColor:"transparent",color:"white",padding:".4rem",border:"none",alignSelf:"baseline"}} type="button" onClick={()=>{dispath(onLogOut());localStorage.clear()}}><CiLogout style={{fontSize:"1.5rem"}} /></button>
       </div>
     </div>
   )

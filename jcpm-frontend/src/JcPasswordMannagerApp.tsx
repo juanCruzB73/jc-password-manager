@@ -17,24 +17,19 @@ export const JcPasswordMannagerApp = () => {
   const [token,setToken]=useState(localStorage.getItem("token"));
   const dispatch=useDispatch<AppDispatch>();
   
-  //persistant login useEffect
-  useEffect(() => {
-    const checkToken = async () => {
+  //update token
+  useEffect(()=>{
+    const autoLogIn=async()=>{
       const payload = await dispatch(decodeJWT(token!));
       if (payload) {
         dispatch(onLogin({
           username: payload.sub,
           email: payload.email,
           userId: Number(payload.userId),
-        }));
-        dispatch(await startGetCredentials(user.userId));
-      }
-    };
-    checkToken();
-  },[token]);
-
-  //update token
-  useEffect(()=>{
+        })); 
+      } 
+    }
+    autoLogIn()
     setToken(localStorage.getItem("token"));
   },[])
 
@@ -48,7 +43,7 @@ export const JcPasswordMannagerApp = () => {
       }
     }
     getCredentials();
-  },[user,status,selectedGroup]);
+  },[user,selectedGroup]);
   
   //get Groups
   useEffect(()=>{

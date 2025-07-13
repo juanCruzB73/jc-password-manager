@@ -1,3 +1,0 @@
-improve persistant login(BUT HOW):done
-implements all functionalities to groups
-add security to filter by group(backend)
