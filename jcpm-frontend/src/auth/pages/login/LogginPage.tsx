@@ -32,7 +32,7 @@ export const LogginPage = () => {
     <div className="login-container">
       <h1 className="login-title">Sing in</h1>
       <form className="login-form" onSubmit={onSubmitLogin}>
-          <input  name="email" value={email} onChange={onInputChange} type="text" className="login-input" aria-describedby="emailHelp" placeholder="Enter your email"/>
+          <input  name="email" value={email} onChange={onInputChange} type="text" className="login-input" placeholder="Enter your username"/>
           <input name="password" value={password} onChange={onInputChange} type="password" className="login-input"  placeholder="Password"/>
         <div className="buttons-login-container">
           <button type="submit" className="login-button" >Submit</button>

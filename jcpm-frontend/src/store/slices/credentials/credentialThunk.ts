@@ -4,16 +4,19 @@ import { isSavingCredential, onClearCredentialMessage, onDeleteCredential, onLoa
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const token = localStorage.getItem('token');
-const headers= {
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("token");
+  return {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
-}
+  };
+};
 
 export const startGetCredentials=async(userId:number)=>{
     return async(dispatch:AppDispatch)=>{
         try{
-            const response=await fetch(`${API_URL}/api/v1/credentials/filter/${userId}`,{headers:headers});
+            dispatch(isSavingCredential());
+            const response=await fetch(`${API_URL}/api/v1/credentials/filter/${userId}`,{headers:getAuthHeaders()});
             const data=await response.json();
             dispatch(onLoadCredentials(data));
             return
@@ -28,7 +31,8 @@ export const startGetCredentials=async(userId:number)=>{
 export const startGetCredentialsByGroup=async(groupId:number)=>{
     return async(dispatch:AppDispatch)=>{
         try{
-            const response=await fetch(`${API_URL}/api/v1/credentials/filter/group/${groupId}`,{headers:headers});
+            dispatch(isSavingCredential());
+            const response=await fetch(`${API_URL}/api/v1/credentials/filter/group/${groupId}`,{headers:getAuthHeaders()});
             const data=await response.json();
             dispatch(onLoadCredentials(data));
             return
@@ -47,7 +51,7 @@ export const startCreateCredential=(payload:ICreateCredential)=>{
             dispatch(isSavingCredential());
             const response = await fetch(`${API_URL}/api/v1/create/credential`, {
                 method: 'POST',
-                headers: headers,
+                headers: getAuthHeaders(),
                 body: JSON.stringify(payload),
             });
             const data=await response.json()
@@ -68,7 +72,7 @@ export const startUpdateCredential=(payload:ICredential)=>{
             dispatch(isSavingCredential());
             const response = await fetch(`${API_URL}/api/v1/edit/credential/${payload.credentialId}`, {
                 method: 'PUT',
-                headers: headers,
+                headers: getAuthHeaders(),
                 body: JSON.stringify(payload),
             });
             const data=await response.json()
@@ -89,7 +93,7 @@ export const startDeleteCredential=(credentialId:number)=>{
             dispatch(isSavingCredential());
             const response = await fetch(`${API_URL}/api/v1/delete/credential/${credentialId}`, {
                 method: 'DELETE',
-                headers: headers,
+                headers: getAuthHeaders(),
             });
             dispatch(onDeleteCredential(credentialId));
             dispatch(onClearCredentialMessage());

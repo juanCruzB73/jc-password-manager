@@ -41,6 +41,18 @@
     justify-content: space-between;
     border: 1px solid #6e6e75;
 }
+.groupSelectorContainer:hover{
+    background-color: #444449;
+}
+.groupSelectorContainerSelected{
+    display: flex;
+    padding: .6rem;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #878791;
+    border: 1px solid #6e6e75;
+}
 .groupSelectorContainer span{
     border-right: none;
     border-left: none;
@@ -88,6 +100,13 @@
         border: 1px solid #6e6e75;
     }
     .groupSelectorContainer button{
+        padding: 0px;
+    }
+    .groupSelectorContainerSelected{
+        width: 100%;
+        border: 1px solid #6e6e75;
+    }
+    .groupSelectorContainerSelected button{
         padding: 0px;
     }
     .side-bar-log-out-user-info{

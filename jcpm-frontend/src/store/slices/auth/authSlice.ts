@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { IUser } from '../../../types';
-import { ILogin } from '../../../types/auth-types/ILogin';
 
 
 export interface IAuthState {

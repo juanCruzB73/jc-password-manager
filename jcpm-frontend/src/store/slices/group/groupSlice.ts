@@ -25,13 +25,14 @@ export const groupSlice = createSlice({
         },
         onLoadGroups:(state,action:PayloadAction<IGroup[]>)=>{
           state.groups=action.payload;
+          state.isSavinGroup=false;
         },
         onSelectGroup:(state,action:PayloadAction<IGroup|null>)=>{
           state.selectedGroup=action.payload;
           state.groupMessage=null;
           state.isSavinGroup=false;
         },
-        onSaveGroup:(state,action:PayloadAction<IGroup>)=>{//ICreateGroup
+        onSaveGroup:(state,action:PayloadAction<IGroup>)=>{
           state.groups.push(action.payload);
           state.isSavinGroup=false;
           state.groupMessage="Group saved!"

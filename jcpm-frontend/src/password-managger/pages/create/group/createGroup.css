@@ -28,6 +28,7 @@
     box-shadow: none;
     background: transparent;
     color: inherit;
+    position: relative;
 }
 .checkbox-group {
   display: flex;
@@ -41,6 +42,16 @@
   gap: 8px;
   font-size: 16px;
 }
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  font-size: 0.75rem;
+  color: red;
+  margin-top: 4px;
+  display: block;
+}
 
 @media (min-width: 768px) {
   .input-group-name{
@@ -50,6 +61,9 @@
     align-items: center;
     border-radius: 2rem;
     border: #6e6e75 1px solid;
+    transform: translateY(-100%);
+    opacity: 0;
+    animation: slideInFromTop 0.4s ease-out forwards;
   }
   .create-group{
     align-self: center;
@@ -78,5 +92,12 @@
   }
   .create-group-contanier{
     align-items: center;
+  }
+}
+
+@keyframes slideInFromTop {
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

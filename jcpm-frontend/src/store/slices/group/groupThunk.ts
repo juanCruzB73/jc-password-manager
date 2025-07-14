@@ -5,17 +5,20 @@ import { isSavingGroup, onClearGroupMessage, onDeleteGroup, onEditGroup, onLoadG
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const token = localStorage.getItem('token');
-const headers= {
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("token");
+  return {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
-}
+  };
+};
+
 
 export const startGetGroupsByUser=(userId:number)=>{
     return async(dispatch:AppDispatch)=>{
         try{
             dispatch(isSavingGroup());
-            const response=await fetch(`${API_URL}/api/v1/groups/filter/${userId}`,{headers:headers});
+            const response=await fetch(`${API_URL}/api/v1/groups/filter/${userId}`,{headers:getAuthHeaders()});
             const data=await response.json()
             dispatch(onLoadGroups(data));
             dispatch(onClearGroupMessage());
@@ -32,7 +35,7 @@ export const startCreateGroup=(payload:ICreateGroup)=>{
         dispatch(isSavingGroup());
         const response=await fetch(`${API_URL}/api/v1/create/group`,{
             method: 'POST',
-            headers: headers,
+            headers: getAuthHeaders(),
             body: JSON.stringify(payload),
         });
         const data=await response.json();
@@ -46,7 +49,7 @@ export const startEditGroup=(payload:ICreateGroup)=>{
         dispatch(isSavingGroup());
         const response=await fetch(`${API_URL}/api/v1/edit/group/${payload.groupId!}`,{
             method: 'PUT',
-            headers: headers,
+            headers: getAuthHeaders(),
             body: JSON.stringify(payload),
         });
         const data=await response.json();
@@ -60,7 +63,7 @@ export const startDeleteGroup=(payload:number)=>{
         dispatch(isSavingGroup());
         await fetch(`${API_URL}/api/v1/delete/groups/${payload}`,{
             method: 'Delete',
-            headers: headers
+            headers: getAuthHeaders()
         });
         dispatch(onDeleteGroup(payload));
         dispatch(onClearGroupMessage());

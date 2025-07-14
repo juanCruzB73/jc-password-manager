@@ -1,11 +1,12 @@
 import { RxCrossCircled } from 'react-icons/rx';
-import { onClosePopUp } from '../../../../store/slices';
+import { onClosePopUp, onTogglePopUp } from '../../../../store/slices';
 import { useDispatch } from 'react-redux';
 import { FaCopy } from 'react-icons/fa';
 import { AppDispatch } from '../../../../store/store';
 import { useEffect, useState } from 'react';
 import { createPasswordWordBased,createPasswordCharacterBased} from '../../../../helpers/createPassword';
 import './CreatePassword.css';
+import { CopiedClipBoard } from '../../../components/notification.cards/copied-clipboard/CopiedClipBoard';
 
 
 export const CreatePassword = () => {
@@ -15,24 +16,31 @@ export const CreatePassword = () => {
     const [passwordType,setPasswordType]     = useState("wordBased");
     const [randomPassword,setRandomPassword] = useState("");
     const [rangeValue,setRangeValue]         = useState(10);
+    const [showMessage,setShowMessagge]=useState(false);
 
     
     const copyToClipboard = async () => {
-        if (!randomPassword) return;
-        try {
-          await navigator.clipboard.writeText(randomPassword);
-        } catch (err) {
-          console.error("Failed to copy: ", err);
-        }
-      };
+      if (!randomPassword) return;
+      try {
+        await navigator.clipboard.writeText(randomPassword);
+      } catch (err) {
+        console.error("Failed to copy: ", err);
+      }
+    };
+
+    const onNotifyCopyed=()=>{
+      setShowMessagge(true);
+      setTimeout(()=>{setShowMessagge(false)},2500)
+    }
     
 
     return (
         <div    className = 'create-passowrd-container'>
+          {showMessage && <CopiedClipBoard/>}
           <div    className = 'create-password-container2'>
             <div    className = "create-top-buttons">
               <button type      = "button" onClick = {()=>dispatch(onClosePopUp())}><RxCrossCircled className = "create-icon" /></button>
-              <button type      = "submit" onClick = {()=>copyToClipboard()}><FaCopy />Copy</button>
+              <button type      = "submit" onClick = {()=>{copyToClipboard();onNotifyCopyed()}}><FaCopy />Copy</button>
             </div>
           <div    className = "password-type-container">
           <button type      = "button" style   = {{borderRight: "1px solid #6e6e75"}} onClick = {()=>setPasswordType("wordBased")}>word based password</button>

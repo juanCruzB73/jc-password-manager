@@ -25,6 +25,7 @@ export const credentialsSlice = createSlice({
       },
       onSelectCredential:(state,action:PayloadAction<ICredential|null>)=>{
         state.selectedCredential=action.payload;
+        state.isSavinCredential=false;
         state.credentialMessage=null;
       },
       onSaveCredential:(state,action:PayloadAction<ICredential>)=>{
@@ -40,7 +41,7 @@ export const credentialsSlice = createSlice({
           }
           return credential;
       })
-      state.isSavinCredential=false;
+        state.isSavinCredential=false;
       },
       onSetCredentialMessage:(state,action:PayloadAction<string>)=>{
         state.credentialMessage=action.payload;
@@ -50,6 +51,7 @@ export const credentialsSlice = createSlice({
       },
       onLoadCredentials:(state,action:PayloadAction<ICredential[]>)=>{
         state.credentials=action.payload;
+        state.isSavinCredential=false;
       },
       onDeleteCredential:(state,action:PayloadAction<number>)=>{
         state.credentials=state.credentials.filter(credential=>action.payload !== credential.credentialId);

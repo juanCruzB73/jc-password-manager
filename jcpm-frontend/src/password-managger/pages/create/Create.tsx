@@ -5,6 +5,7 @@ import { CreateGroup } from "./group/CreateGroup"
 import { CreatePassword } from "./password/CreatePassword"
 import { CreateNote } from "./note/CreateNote"
 import './create.css';
+
 export const Create = () => {
     
     const {popUpType} = useSelector((state:RootState)=>state.popUp)

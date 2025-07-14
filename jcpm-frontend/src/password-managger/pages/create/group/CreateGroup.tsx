@@ -3,16 +3,20 @@ import { useForm } from "../../../../hooks/useForm"
 import { onClosePopUp, startCreateGroup, startEditGroup, startGetCredentials } from "../../../../store/slices"
 import { AppDispatch, RootState } from "../../../../store/store" // Corregido
 import { RxCrossCircled } from "react-icons/rx"
-import { ICredential, IGroup } from "../../../../types"
 import { ICreateGroup } from "../../../../types/password-types/ICreateGroup"
 import { useEffect, useState } from "react"
 import { CredentialDropdown } from "../../../components/desplegable-check-boxes/CredentialDropdown"
 import { extractIdsFromCredentials } from "../../../../helpers/extractIdsFromCredentials"
 import "./CreateGroup.css"
+import { groupSchema } from "../../../../schemas/groupSchema"
 
 interface IFormGroup {
   groupName: string;
   selectedCredentialIds: number[];
+}
+
+interface IgroupErrors{
+  errorTitleGroup:string
 }
 
 let formInitialState={groupName: "",selectedCredentialIds: []};
@@ -66,6 +70,26 @@ export const CreateGroup = () => {
     }
     dispatch(onClosePopUp());
   };
+    const [errorMessages, setErrorMessages] = useState<IgroupErrors>({errorTitleGroup:""})
+    const [buttonState, setButtonState] = useState(false);
+    const validate = async () => {
+      try {
+        await groupSchema.validate({ titleGroup: groupName }, { abortEarly: false });
+        setErrorMessages({ errorTitleGroup: "" });
+        setButtonState(true);
+      } catch (err: any) {
+        const newErrors: IgroupErrors = { errorTitleGroup: "" };
+        setButtonState(false);
+        err.errors.forEach((errorElement: string) => {
+          if (errorElement === "please name your group") newErrors.errorTitleGroup = errorElement;
+        });
+        setErrorMessages(newErrors);
+      }
+    };
+
+    useEffect(() => {
+      validate();
+    }, [groupName]);
 
   return (
     <form onSubmit={onSubmitForm} className="create-group">
@@ -74,7 +98,7 @@ export const CreateGroup = () => {
           <button type="button" onClick={() => dispatch(onClosePopUp())}>
             <RxCrossCircled className="create-icon" />
           </button>
-          <button type="submit" style={{marginLeft:"1rem"}}>Save</button>
+          <button type="submit" disabled={!buttonState || isSavinGroup} style={{marginLeft:"1rem"}}>Save</button>
         </div>
         <div>
           <h2>Create a group</h2>
@@ -86,9 +110,11 @@ export const CreateGroup = () => {
           name="groupName"
           value={groupName}
           onChange={onInputChange}
-          className="input-group-name"
-        />
-
+          className={`input-group-name ${errorMessages.errorTitleGroup ? "input-error" : ""}`}
+          />
+          {errorMessages.errorTitleGroup && (
+            <span className="error-message">{errorMessages.errorTitleGroup}</span>
+          )}
         <CredentialDropdown
           credentials={credentials}
           selectedCredentialIds={selectedCredentialIds}

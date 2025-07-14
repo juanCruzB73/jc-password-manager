@@ -8,6 +8,7 @@ import { IGroup } from '../../types';
 import { FaPencilAlt, FaTrash } from 'react-icons/fa';
 import './SideBarLogOut.css';
 import { AiOutlineClear } from 'react-icons/ai';
+import { ConfirmCard } from '../../password-managger/components/notification.cards/confirmation-card/ConfirmCard';
 
 export const SideBarLogOut = () => {
 
@@ -23,10 +24,17 @@ export const SideBarLogOut = () => {
 
   const onHandleSelectGroup=(groupIn:IGroup|null)=>{
     dispath(onSelectGroup(groupIn));
-  }
+  };
+
   const onHandleDeleteGroup=async(groupId:number)=>{
     dispath(startDeleteGroup(groupId));
-  }
+    handleHideConfirm();
+  };
+  const [showConfirm,setShowConfirm]=useState(false);
+
+  const handleHideConfirm=()=>{
+    setShowConfirm(!showConfirm);
+  };
 
   return (
     <div className="side-bar-log-out">
@@ -41,11 +49,12 @@ export const SideBarLogOut = () => {
               <span style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"90%",marginLeft:"10px"}} onClick={()=>onHandleSelectGroup(null)}>Clear Group <AiOutlineClear/></span>
               {
                 groups.map((group:IGroup)=>(
-                  <div className="groupSelectorContainer">
+                  <div className={group==selectedGroup?"groupSelectorContainerSelected":"groupSelectorContainer"}>
+                    {showConfirm&&<ConfirmCard onConfirm={()=>{onHandleDeleteGroup(group.groupId)}} onCancel={handleHideConfirm}/>}
                     <span key={group.groupId} onClick={()=>onHandleSelectGroup(group)}>{group.titleGroup}</span>
                     <div className="groupButtons">
                       <button type="button" onClick={()=>{dispath(onSelectGroup(group));onClickOption({popUpType:"group",actionPopUp:"edit"});}}><FaPencilAlt className="icons-top" /></button >
-                      <button type="button" onClick={()=>{onHandleDeleteGroup(group.groupId)}}><FaTrash className="icons-top"/></button >
+                      <button type="button" onClick={()=>handleHideConfirm()}><FaTrash className="icons-top"/></button >
                     </div>
                   </div>
                 ))
