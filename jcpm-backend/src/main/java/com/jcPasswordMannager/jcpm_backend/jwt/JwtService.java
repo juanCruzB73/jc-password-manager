@@ -1,6 +1,7 @@
 package com.jcPasswordMannager.jcpm_backend.jwt;
 
 import com.jcPasswordMannager.jcpm_backend.user.UserModel;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,7 +17,11 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static String SECRET="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
+    private static String SECRET;
+    public JwtService(){
+        Dotenv dotenv = Dotenv.load();
+        this.SECRET = dotenv.get("SECRET_KEY");
+    }
     public String getToken(UserModel user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("userId", user.getUserId());
