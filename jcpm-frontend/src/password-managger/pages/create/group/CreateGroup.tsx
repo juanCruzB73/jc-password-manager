@@ -7,8 +7,8 @@ import { ICreateGroup } from "../../../../types/password-types/ICreateGroup"
 import { useEffect, useState } from "react"
 import { CredentialDropdown } from "../../../components/desplegable-check-boxes/CredentialDropdown"
 import { extractIdsFromCredentials } from "../../../../helpers/extractIdsFromCredentials"
-import "./CreateGroup.css"
 import { groupSchema } from "../../../../schemas/groupSchema"
+import "./CreateGroup.css"
 
 interface IFormGroup {
   groupName: string;

@@ -34,7 +34,6 @@ interface IformErrors{
   errorWebLink:string,
   //note:"",
 }
-import "./createCredential.css"
 
 export const CreateCredential = () => {
   const { actionPopUp } = useSelector((state: RootState) => state.popUp);
