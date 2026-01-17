@@ -251,7 +251,7 @@ Acceso seguro mediante JWT con registro e inicio de sesión.
 * **Tokens JWT:** Sesiones seguras sin estado en el servidor
 * **Protección de Rutas:** Acceso restringido a usuarios autenticados
 
-![Pantalla de Login](jcpm-login.png)
+![Pantalla de Login](readmeImages/jcpm-login.png)
 
 ### 2. Gestión de Credenciales
 
@@ -267,7 +267,7 @@ Almacenamiento y organización de contraseñas y credenciales.
 * **Organización por Grupos:** Categorización de credenciales
 * **Búsqueda y Filtrado:** Localización rápida de credenciales
 
-![Crear Credencial](jcpm-create-credential.png)
+![Crear Credencial](readmeImages/jcpm-create-credential.png)
 
 ### 3. Visualización de Credenciales
 
@@ -278,7 +278,7 @@ Interfaz clara para consultar información almacenada.
 * **Copiar al Portapapeles:** Copia rápida de usuario y contraseña
 * **Información Completa:** Todos los campos en una vista organizada
 
-![Visualizar Credencial](jcpm-display-credential-info.png)
+![Visualizar Credencial](readmeImages/jcpm-display-credential-info.png)
 
 ### 4. Menú de Acciones
 
@@ -289,7 +289,7 @@ Operaciones rápidas sobre credenciales.
 * **Compartir:** (Funcionalidad futura)
 * **Exportar:** (Funcionalidad futura)
 
-![Menú de Acciones](jcpm-action-menu.png)
+![Menú de Acciones](readmeImages/jcpm-action-menu.png)
 
 ## Estructura del Proyecto
 
@@ -422,7 +422,7 @@ jcpm-frontend/src/
 | GET | `/api/users/me` | Obtener información del usuario actual | ✅ |
 | PUT | `/api/users/me` | Actualizar información del usuario | ✅ |
 
-## 🔒 Seguridad
+## Seguridad
 
 ### Características de Seguridad Implementadas
 
