@@ -8,11 +8,11 @@ import { useEffect, useState } from "react";
 import { registerSchema } from "../../../schemas/registerSchema";
 
 
-interface IRegisterForm{
-  username:string
-  email:string;
-  password:string;
-  password2:string
+interface IRegisterForm {
+  username: string
+  email: string;
+  password: string;
+  password2: string
 }
 
 interface IRegisterErrors {
@@ -21,48 +21,48 @@ interface IRegisterErrors {
   password?: string;
   password2?: string;
 }
-const intialFormValue:IRegisterForm={
-  username:"",
-  email:"",
-  password:"",
-  password2:""
+const intialFormValue: IRegisterForm = {
+  username: "",
+  email: "",
+  password: "",
+  password2: ""
 }
 
 export const RegisterPage = () => {
-    const {email,password,username,password2,onInputChange}=useForm<IRegisterForm>(intialFormValue)
+  const { email, password, username, password2, onInputChange } = useForm<IRegisterForm>(intialFormValue)
 
-    const dispath=useDispatch<AppDispatch>();
-    const navigate=useNavigate();
-    const onSubmitLogin=(event:React.FormEvent)=>{
-      event.preventDefault();
-      dispath(startAcountResgister({username,email,password}))
-      console.log(username,email,password,password2)
-    }
-    const [errors, setErrors] = useState<IRegisterErrors>({});
-    const [isValid, setIsValid] = useState(false);
+  const dispath = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const onSubmitLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    dispath(startAcountResgister({ username, email, password }))
 
-    useEffect(() => {
-      const validate = async () => {
-        try {
-          await registerSchema.validate({ username, email, password, password2 }, { abortEarly: false });
-          setErrors({});
-          setIsValid(true);
-        } catch (err: any) {
-          const newErrors: IRegisterErrors = {};
-          err.inner.forEach((e: any) => {
-            newErrors[e.path as keyof IRegisterErrors] = e.message;
-          });
-          setErrors(newErrors);
-          setIsValid(false);
-        }
-      };
-    
-      validate();
-    }, [username, email, password, password2]);
-  
-    return (
-      <div className="register-container">
-        <form className="register-form" onSubmit={onSubmitLogin}>
+  }
+  const [errors, setErrors] = useState<IRegisterErrors>({});
+  const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    const validate = async () => {
+      try {
+        await registerSchema.validate({ username, email, password, password2 }, { abortEarly: false });
+        setErrors({});
+        setIsValid(true);
+      } catch (err: any) {
+        const newErrors: IRegisterErrors = {};
+        err.inner.forEach((e: any) => {
+          newErrors[e.path as keyof IRegisterErrors] = e.message;
+        });
+        setErrors(newErrors);
+        setIsValid(false);
+      }
+    };
+
+    validate();
+  }, [username, email, password, password2]);
+
+  return (
+    <div className="register-container">
+      <form className="register-form" onSubmit={onSubmitLogin}>
         <input
           name="username"
           value={username}
@@ -107,7 +107,7 @@ export const RegisterPage = () => {
           <button type="submit" className="register-button" disabled={!isValid}>Submit</button>
           <button type="button" className="login-button" onClick={() => navigate("/auth/login")}>Login</button>
         </div>
-    </form>
-      </div>
-      )
+      </form>
+    </div>
+  )
 }

@@ -1,4 +1,4 @@
-.create-container{
+.create-container {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -6,15 +6,17 @@
     left: 0;
     padding: 0px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     backdrop-filter: brightness(90%) blur(2px);
 }
-.create-top-buttons{
+
+.create-top-buttons {
     display: flex;
     width: 40%;
     align-self: flex-end;
 }
-.create-top-buttons button{
+
+.create-top-buttons button {
     background-color: transparent;
     border: 1px solid #6e6e75;
     border-radius: 1rem;
@@ -23,7 +25,8 @@
     color: white;
     font-size: 1.2rem;
 }
-.create-icon{
+
+.create-icon {
     font-size: 1.5rem;
     border: none;
     background-color: transparent;

@@ -13,26 +13,26 @@ import { useEffect, useMemo, useState } from "react"
 import { FaEye } from "react-icons/fa"
 import { credentialSchema } from "../../../../schemas/credentialShema"
 
-interface IFormCredential{
-  title:string;
-  email:string;
-  password:string;
-  webLink:string;
-  //note:string;
+interface IFormCredential {
+  title: string;
+  email: string;
+  password: string;
+  webLink: string;
+
 }
-let formInitialState={
-  title:"",
-  email:"",
-  password:"",
-  webLink:"",
-  //note:"",
+let formInitialState = {
+  title: "",
+  email: "",
+  password: "",
+  webLink: "",
+
 }
-interface IformErrors{
-  errorTitle:string,
-  errorEmail:string,
-  errorPassword:string,
-  errorWebLink:string,
-  //note:"",
+interface IformErrors {
+  errorTitle: string,
+  errorEmail: string,
+  errorPassword: string,
+  errorWebLink: string,
+
 }
 
 export const CreateCredential = () => {
@@ -42,6 +42,7 @@ export const CreateCredential = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [errorMessages, setErrorMessages] = useState<IformErrors>({
     errorTitle: "",
@@ -51,14 +52,14 @@ export const CreateCredential = () => {
   });
 
   const formInitialState = useMemo(() => {
-  return actionPopUp === "edit"
-    ? {
+    return actionPopUp === "edit"
+      ? {
         title: selectedCredential.title,
         email: selectedCredential.email,
         password: selectedCredential.password,
         webLink: selectedCredential.website
       }
-    : {
+      : {
         title: "",
         email: "",
         password: "",
@@ -68,12 +69,12 @@ export const CreateCredential = () => {
 
 
   const {
-  title,
-  email,
-  password,
-  webLink,
-  formState,
-  onInputChange
+    title,
+    email,
+    password,
+    webLink,
+    formState,
+    onInputChange
   } = useForm<IFormCredential>(formInitialState);
 
 
@@ -103,6 +104,7 @@ export const CreateCredential = () => {
 
   const onSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitted(true);
     if (!buttonState) return;
 
     const commonData = {
@@ -137,7 +139,7 @@ export const CreateCredential = () => {
         <button type="button" onClick={() => dispatch(onClosePopUp())}>
           <RxCrossCircled className="create-icon" />
         </button>
-        <button type="submit" disabled={!buttonState || isSavinCredential}>Save</button>
+        <button type="submit" disabled={isSavinCredential}>Save</button>
       </div>
 
       <div className="input-container-create">
@@ -147,18 +149,18 @@ export const CreateCredential = () => {
           value={title}
           onChange={onInputChange}
           placeholder="Site's name"
-          className={`input-field-create ${errorMessages.errorTitle ? "input-error" : ""}`}
+          className={`input-field-create ${isSubmitted && errorMessages.errorTitle ? "input-error" : ""}`}
         />
-        {errorMessages.errorTitle && <span className="error-message">{errorMessages.errorTitle}</span>}
+        {isSubmitted && errorMessages.errorTitle && <span className="error-message">{errorMessages.errorTitle}</span>}
 
         <div className="input-credentials-create">
-          <div className={`input-credential-field ${errorMessages.errorEmail ? "input-error" : ""}`}>
+          <div className={`input-credential-field ${isSubmitted && errorMessages.errorEmail ? "input-error" : ""}`}>
             <MdEmail className="create-icon" />
             <input type="email" name="email" value={email} onChange={onInputChange} placeholder="Email" />
           </div>
-          {errorMessages.errorEmail && <span className="error-message">{errorMessages.errorEmail}</span>}
+          {isSubmitted && errorMessages.errorEmail && <span className="error-message">{errorMessages.errorEmail}</span>}
 
-          <div className={`input-credential-field ${errorMessages.errorPassword ? "input-error" : ""}`}>
+          <div className={`input-credential-field ${isSubmitted && errorMessages.errorPassword ? "input-error" : ""}`}>
             <RiLockPasswordFill className="create-icon" />
             <input
               type={showPassword ? "text" : "password"}
@@ -169,15 +171,15 @@ export const CreateCredential = () => {
             />
             <FaEye onClick={() => setShowPassword(!showPassword)} className="create-icon" />
           </div>
-          {errorMessages.errorPassword && <span className="error-message">{errorMessages.errorPassword}</span>}
+          {isSubmitted && errorMessages.errorPassword && <span className="error-message">{errorMessages.errorPassword}</span>}
         </div>
 
         <div className="input-credentials-create">
-          <div className={`input-credential-field ${errorMessages.errorWebLink ? "input-error" : ""}`}>
+          <div className={`input-credential-field ${isSubmitted && errorMessages.errorWebLink ? "input-error" : ""}`}>
             <TbWorld className="create-icon" />
             <input type="text" name="webLink" value={webLink} onChange={onInputChange} placeholder="Website link" />
           </div>
-          {errorMessages.errorWebLink && <span className="error-message">{errorMessages.errorWebLink}</span>}
+          {isSubmitted && errorMessages.errorWebLink && <span className="error-message">{errorMessages.errorWebLink}</span>}
         </div>
       </div>
     </form>

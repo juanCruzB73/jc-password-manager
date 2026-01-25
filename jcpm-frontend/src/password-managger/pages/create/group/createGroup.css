@@ -1,103 +1,169 @@
-.create-group{
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background-color: #121213;
+.create-group {
+  width: 600px;
+  height: auto;
+  min-height: 600px;
+  padding: 2rem;
+  background: radial-gradient(circle at top right, #2a2a2d, #121213);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-.create-group-contanier{
+
+.create-group-contanier {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.create-top-buttons {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
-.input-group-name{
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 20%;
-    border: 1px solid #6e6e75;
-    background-color: transparent;
-    border-radius: 1rem;
-    color: white;
-    font-size: 2rem;
-    padding: 2rem
+
+.create-top-buttons button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(4px);
 }
-.input-group-name:focus{
-    outline: none;
-    box-shadow: none;
-    background: transparent;
-    color: inherit;
-    position: relative;
+
+.create-top-buttons button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
+
+.create-top-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.create-icon {
+  font-size: 1.2rem;
+}
+
+.create-group-contanier h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(90deg, #fff, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.create-group-contanier span {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+}
+
+.input-group-name {
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  padding: 0 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-group-name:focus {
+  outline: none;
+  border-color: #40c4ff;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 3px rgba(64, 196, 255, 0.1);
+}
+
+.input-error {
+  border-color: #ff5252 !important;
+  background: rgba(255, 82, 82, 0.05) !important;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: #ff5252;
+  margin-top: -1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
 .checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.checkbox-group::-webkit-scrollbar {
+  width: 6px;
+}
+
+.checkbox-group::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.checkbox-group::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
 
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
-}
-.input-error {
-  border: 1px solid red;
+  gap: 12px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+  cursor: pointer;
 }
 
-.error-message {
-  font-size: 0.75rem;
-  color: red;
-  margin-top: 4px;
-  display: block;
+.checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 @media (min-width: 768px) {
-  .input-group-name{
-    width: 80%;
-  }
-  .create-group{
-    align-items: center;
-    border-radius: 2rem;
-    border: #6e6e75 1px solid;
-    transform: translateY(-100%);
-    opacity: 0;
-    animation: slideInFromTop 0.4s ease-out forwards;
-  }
-  .create-group{
-    align-self: center;
-    justify-self: center;
-    width: 70%;
-    height: 80%;
-  }
-  .create-group-contanier{
-    align-items: center;
-  }
-}
-@media (min-width: 1200px){
-  .input-group-name{
-    width: 80%;
-  }
-  .create-group{
-    align-items: center;
-    border-radius: 2rem;
-    border: #6e6e75 1px solid;
-  }
-  .create-group{
-    align-self: center;
-    justify-self: center;
-    width: 50%;
-    height: 80%;
-  }
-  .create-group-contanier{
-    align-items: center;
+  .create-group {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%) translateX(100%);
+    margin-right: 2rem;
+
+    border-radius: 24px;
+
+    animation: slideInFromRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
 
-@keyframes slideInFromTop {
+@keyframes slideInFromRight {
   to {
-    transform: translateY(0);
+    transform: translate(0, -50%) translateX(0);
     opacity: 1;
   }
 }

@@ -1,14 +1,16 @@
-.sidebar-container{
+.sidebar-container {
     height: 100%;
     width: 40%;
     border: 1px solid #6e6e75;
     overflow-y: auto;
 }
-.filter-buttons{
+
+.filter-buttons {
     display: flex;
     flex-direction: column;
 }
-.filter-buttons button{
+
+.filter-buttons button {
     padding: .6rem;
     margin-right: .4rem;
     width: 100%;
@@ -18,22 +20,27 @@
     border: #6e6e75 1px solid;
     border-radius: .7rem;
 }
-.side-bar-log-out-group-button{
+
+.side-bar-log-out-group-button {
     padding: 1rem;
 }
-.group-diplay{
+
+.group-diplay {
     display: flex;
     flex-direction: column;
 }
-.group-diplay span{
+
+.group-diplay span {
     font-size: 1rem;
     border-radius: 1rem;
 }
-.group-diplay span:hover{
+
+.group-diplay span:hover {
     cursor: pointer;
-    color: #888892 ;
+    color: #888892;
 }
-.groupSelectorContainer{
+
+.groupSelectorContainer {
     display: flex;
     padding: .6rem;
     width: 100%;
@@ -41,10 +48,12 @@
     justify-content: space-between;
     border: 1px solid #6e6e75;
 }
-.groupSelectorContainer:hover{
+
+.groupSelectorContainer:hover {
     background-color: #444449;
 }
-.groupSelectorContainerSelected{
+
+.groupSelectorContainerSelected {
     display: flex;
     padding: .6rem;
     width: 100%;
@@ -53,39 +62,50 @@
     background-color: #878791;
     border: 1px solid #6e6e75;
 }
-.groupSelectorContainer span{
+
+.groupSelectorContainer span {
     border-right: none;
     border-left: none;
 }
-.groupButtons{
+
+.groupButtons {
     display: flex;
     max-width: 20%;
     padding: none;
 }
-.groupButtons button{
+
+.groupButtons button {
     padding: 0px;
     border: none;
 }
-.groupButtons svg{
-    font-size: .9rem;
+
+.groupButtons svg {
+    font-size: .6rem;
 }
-@media (min-width: 768px){
-    .sidebar-container{
+
+@media (min-width: 768px) {
+    .sidebar-container {
         padding: 0px;
     }
-    .filter-buttons{
+
+    .filter-buttons {
         padding: 0px;
     }
-    .group-diplay{
+
+    .group-diplay {
         display: flex;
         flex-direction: column;
         padding: 0px;
         width: 100%;
     }
-    .sidebar-container{
+
+    .sidebar-container {
         max-width: 30%;
-    };
-    .filter-buttons button{
+    }
+
+    ;
+
+    .filter-buttons button {
         padding: .6rem;
         margin-right: .4rem;
         width: 100%;
@@ -95,41 +115,51 @@
         border: #6e6e75 1px solid;
         border-radius: .7rem;
     }
-    .groupSelectorContainer{
+
+    .groupSelectorContainer {
         width: 100%;
         border: 1px solid #6e6e75;
     }
-    .groupSelectorContainer button{
+
+    .groupSelectorContainer button {
         padding: 0px;
     }
-    .groupSelectorContainerSelected{
+
+    .groupSelectorContainerSelected {
         width: 100%;
         border: 1px solid #6e6e75;
     }
-    .groupSelectorContainerSelected button{
+
+    .groupSelectorContainerSelected button {
         padding: 0px;
     }
-    .side-bar-log-out-user-info{
-       display: flex;
+
+    .side-bar-log-out-user-info {
+        display: flex;
         flex-direction: column;
         padding: 2rem;
     }
-    .group-diplay span{
+
+    .group-diplay span {
         padding: 1px;
         font-size: 1rem;
         width: 100%;
     }
-    .side-bar-log-out-group-button{
+
+    .side-bar-log-out-group-button {
         padding: 1rem;
     }
-    .groupButtons{
+
+    .groupButtons {
         width: 20%;
         padding: 0px;
     }
-    .groupButtons button{
+
+    .groupButtons button {
         border: none;
     }
-    .groupButtons svg{
+
+    .groupButtons svg {
         font-size: .9rem;
     }
 }

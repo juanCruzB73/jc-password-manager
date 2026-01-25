@@ -1,11 +1,201 @@
-.side-bar-log-out{
+.side-bar-log-out {
     max-width: 25%;
+    width: 250px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #6e6e75;
     height: 100%;
-};
+    background: #121213;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    padding: 1rem;
+    gap: 1.5rem;
+}
 
-@media (min-width: 1200px){
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+}
 
+.side-bar-log-out-group-button {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.side-bar-log-out-group-button button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.side-bar-log-out-group-button button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.group-diplay {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.group-diplay>span {
+    font-size: 0.85rem;
+    color: #888;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    border-radius: 8px;
+}
+
+.group-diplay>span:hover {
+    color: #ff5252;
+    background: rgba(255, 82, 82, 0.05);
+}
+
+.groupSelectorContainer,
+.groupSelectorContainerSelected {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.groupSelectorContainer {
+    color: #ccc;
+    background: transparent;
+}
+
+.groupSelectorContainer:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+}
+
+.groupSelectorContainerSelected {
+    background: rgba(64, 196, 255, 0.1);
+    color: #40c4ff;
+    border: 1px solid rgba(64, 196, 255, 0.2);
+}
+
+.groupButtons button {
+    border: none;
+    color: inherit;
+    padding: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.60rem;
+    background: transparent;
+}
+
+.groupButtons button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.side-bar-log-out-user-info {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.side-bar-log-out-user-info span:first-child {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.side-bar-log-out-user-info span:nth-child(2) {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.side-bar-log-out-user-info button {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #ff5252 !important;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.side-bar-log-out-user-info button:hover {
+    opacity: 1;
+}
+
+.filter-buttons::-webkit-scrollbar {
+    width: 4px;
+}
+
+.filter-buttons::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.filter-buttons::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+@media (min-width: 1200px) {
+    .group-diplay {
+        border-left: 2px solid rgba(255, 255, 255, 0.05);
+        margin-left: 0.5rem;
+    }
+
+    .side-bar-log-out {
+        max-width: 20%;
+    }
+
+    .groupSelectorContainer,
+    .groupSelectorContainerSelected {
+        max-width: 90%;
+        justify-content: space-between;
+    }
+
+    .groupButtons {
+        display: flex;
+        margin-right: .4rem;
+        max-width: 20%;
+        gap: 0.4rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .groupButtons button {
+        padding: 0px;
+        font-size: .2rem;
+    }
+
+    .groupSelectorContainer:hover .groupButtons,
+    .groupSelectorContainerSelected:hover .groupButtons {
+        opacity: 1;
+    }
 }
