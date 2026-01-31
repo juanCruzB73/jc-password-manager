@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "jcpm saver",
+  "version": "1.0.0",
+  "description": "Detect an auth attempt and suggest saving the data in the jcpm page",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "notifications"
+  ],
+
+  "background": {
+    "scripts": ["scripts/background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/content.js"]
+    }
+  ],
+
+  "browser_action": {
+    "default_popup": "views/index.html",
+    "default_icon": "images/jcpm-icon.png"
+  },
+
+  "icons": {
+    "48": "images/jcpm-icon.png"
+  }
+}

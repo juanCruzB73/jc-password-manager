@@ -43,3 +43,9 @@
         color: white;
     }
 }
+
+.navbar-icon {
+    height: 40px;
+    width: 40px;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.466)) drop-shadow(0 0 5px rgba(255, 247, 247, 0.397));
+}

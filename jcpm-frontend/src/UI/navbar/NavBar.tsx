@@ -74,6 +74,9 @@ export const NavBar = () => {
 
     return (
       <Nav variant="underline" className="navbar-container">
+        <Nav.Item style={{width:"10%", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+           <img src="/jcpm-icon.svg" className="navbar-icon" alt="JcPasswordManager" />
+        </Nav.Item>
         <Nav.Item style={{width:"10%"}}>
           <div className='nav-bar-session'>
             {size.width<762?<button type="button" onClick={()=>{dispath(onLogOut())}}><CiLogout className="add-session-icon"/></button>:<></>}
